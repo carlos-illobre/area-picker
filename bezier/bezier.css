@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.toolOption {
+	float: left;
+}
+
+#main {
+	clear: both;
+	float: left;
+}
+
+.codeGeneratorPanel {
+	float: left;
+}

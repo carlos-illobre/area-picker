@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>CH1EX1: Basic Hello World HTML Page</title>
+		<link rel="stylesheet" type="text/css" href="bezier.css" />
+		<script src="bezier.js"></script>
+	</head>
+	<body>
+		<div id="codePanel"></div>
+		<div id="toolOptionSet">
+			<fieldset class="toolOption">
+				<legend>Dibujo</legend>
+				<select id="lineType">
+					<option value="1">Recta</option>
+					<option value="2">Arco</option>
+					<option value="3">Cuadratica</option>
+					<option value="4">Bezier</option>
+				</select>
+			</fieldset>
+			<fieldset class="toolOption">
+				<legend>Coordenadas</legend>
+				<div id="coords">X=X Y=Y</div>
+				<div id="clickcoords">X=X Y=Y</div>				
+			</fieldset>
+			<!--fieldset class="toolOption">
+				<legend>Ancho</legend>			
+				<fieldset class="toolOption">
+					<legend>l&iacute;nea</legend>
+					<select id="lineWidth">
+						<option value="3">3</option>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</fieldset>
+				<fieldset class="toolOption">
+					<legend>borde</legend>				
+					<select id="borderWidth">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</fieldset>
+			</fieldset>
+			<!--fieldset class="toolOption">
+				<legend>Color</legend>
+				<fieldset class="toolOption">
+					<legend>l&iacute;nea</legend>
+					<select id="lineColor">
+						<option value="black">Negro</option>
+						<option value="green">Verde</option>
+						<option value="silver">Plateado</option>
+						<option value="lime">Lima</option>
+						<option value="gray">Gris</option>
+						<option value="olive">Oliva</option>
+						<option value="white">Blanco</option>
+						<option value="yellow">Amarillo</option>
+						<option value="maroon">Marron</option>
+						<option value="navy">Navy</option>
+						<option value="red">Rojo</option>
+						<option value="blue">Azul</option>
+						<option value="purple">Purpura</option>
+						<option value="teal">Teal</option>
+						<option value="fuchsia">Fucsia</option>
+						<option value="aqua">Aqua</option>
+					</select>
+				</fieldset>
+				<!--fieldset class="toolOption">
+					<legend>borde</legend>
+					<select id="lineBorder">
+						<option value="black">Negro</option>
+						<option value="green">Verde</option>
+						<option value="silver">Plateado</option>
+						<option value="lime">Lima</option>
+						<option value="gray">Gris</option>
+						<option value="olive">Oliva</option>
+						<option value="white">Blanco</option>
+						<option value="yellow">Amarillo</option>
+						<option value="maroon">Marron</option>
+						<option value="navy">Navy</option>
+						<option value="red">Rojo</option>
+						<option value="blue">Azul</option>
+						<option value="purple">Purpura</option>
+						<option value="teal">Teal</option>
+						<option value="fuchsia">Fucsia</option>
+						<option value="aqua">Aqua</option>
+					</select>
+				</fieldset>
+			</fieldset-->
+			<!--fieldset class="toolOption">
+				<legend>Punta de L&iacute;nea</legend>
+				<select id="lineCap">
+					<option value="round">round</option>
+					<option value="butt">butt</option>
+					<option value="square">square</option>
+				</select>
+			</fieldset-->
+			<!--fieldset class="toolOption">
+				<legend>Tipo de Uni&oacute;n</legend>
+				<select id="lineJoin">
+					<option value="miter">butt</option>
+					<option value="bevel">round</option>
+					<option value="round">square</option>
+				</select>
+			</fieldset-->
+			<input id="finishDraw" type="button" value="terminar" />
+		</div>
+		<div id="main">
+			<canvas id="mainCv" width="500" height="300">
+				Your browser does not support HTML5 Canvas.
+			</canvas>
+		</div>
+		<div id="code" class="codeGeneratorPanel"></div>
+		<div id="map" class="codeGeneratorPanel"></div>
+	</body>
+</html>
+

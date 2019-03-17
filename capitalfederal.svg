@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:ev="http://www.w3.org/2001/xml-events"
+     version="1.1"
+     baseProfile="full"
+     width="378"
+     height="415"
+     >
+    <script type="ecmascript">
+	<![CDATA[
+
+	window.addEventListener('load', function() {
+            var gSelectedAreas = document.getElementById('gSelectedAreas');
+            var gUnselectedAreas = document.getElementById('gUnselectedAreas');
+            var gMouseoverAreas = document.getElementById('gMouseoverAreas');
+            var gDefsTexts = document.getElementById('gDefsTexts');
+            var gMouseoverTexts = document.getElementById('gMouseoverTexts');
+            var gSelectedTexts = document.getElementById('gSelectedTexts');
+            var texts = {};
+            var areas = {};
+            
+            (function preprocessTexts() {
+                var aux = gDefsTexts.getElementsByTagName('text');
+                for (i=0; i<aux.length; i++) {
+                    var text = aux[i];
+                    var id = text.textContent.replace(/ /g, "_");
+                    text.id = 'text_' + id;
+                    texts[id] = text;
+                }
+            }());
+            
+            (function preprocessAreas() {
+                var aux = gUnselectedAreas.getElementsByTagName('path');
+                for (i=0; i<aux.length; i++) {
+                    var area = aux[i];
+                    area.style.filter = "url(#unselected-shadow)";
+                    areas['text_' + area.id] = area;
+                }
+            }());
+                            
+            function showAsMouseOver(area) {
+                gMouseoverAreas.appendChild(area);
+                area.style.filter = "url(#mouseover-shadow)";
+                var text = texts[area.id];
+                gMouseoverTexts.appendChild(text);
+                text.style.filter = "url(#text-shadow)";
+            }
+            
+            function showAsSelected(area) {
+                gSelectedAreas.appendChild(area);
+                area.style.filter = "none";
+                var text = texts[area.id];
+                gSelectedTexts.appendChild(text);
+                text.style.filter = "url(#text-shadow)";
+            }
+            
+            function showAsUnselected(area) {
+                gUnselectedAreas.appendChild(area);
+                area.style.filter = "url(#unselected-shadow)";
+                var text = texts[area.id];
+                gDefsTexts.appendChild(text);
+                text.style.filter = "none";
+            }
+            
+            var stateMachine = {
+                fromSelected: false,
+                unselected: {
+                    toMouseOverState: function(area) {
+                        showAsMouseOver(area);
+                        stateMachine.fromSelected = false;
+                    },
+                    toSelectedState: function(area) {
+                        showAsSelected(area);
+                    }
+                },
+                mouseover: {
+                    toUnselectedState: function(area) {
+                        showAsUnselected(area);
+                    },
+                    toSelectedState: function(area) {
+                        showAsSelected(area);
+                    }
+                },
+                selected: {
+                    toMouseOverState: function(area) {
+                        showAsMouseOver(area);
+                        stateMachine.fromSelected = true;
+                    },
+                    toUnselectedState: function(area) {
+                        showAsUnselected(area);
+                    }
+                }
+            }
+            
+            gSelectedAreas.addEventListener("mouseover", function(evt) {
+                stateMachine.selected.toMouseOverState(evt.target);
+            }, false);
+            gSelectedAreas.addEventListener("click", function(evt) {
+                stateMachine.selected.toUnselectedState(evt.target);
+            }, false);
+            gSelectedTexts.addEventListener("click", function(evt) {
+                stateMachine.selected.toUnselectedState(areas[evt.target.id]);
+            }, false);
+            
+            gUnselectedAreas.addEventListener("mouseover", function(evt) {
+                stateMachine.unselected.toMouseOverState(evt.target);
+            }, false);
+            gUnselectedAreas.addEventListener("click", function(evt) {
+                stateMachine.unselected.toSelectedState(evt.target);
+            }, false);
+            
+            gMouseoverAreas.addEventListener("mouseout", function(evt) {
+                if (!(evt.relatedTarget instanceof SVGTextElement)) {
+                    stateMachine.fromSelected ? stateMachine.mouseover.toSelectedState(evt.target) : stateMachine.mouseover.toUnselectedState(evt.target);
+                }
+            }, false);
+            gMouseoverTexts.addEventListener("mouseout", function(evt) {
+                if (evt.target.id != 'text_' + evt.relatedTarget.id) {
+                    stateMachine.fromSelected ? stateMachine.mouseover.toSelectedState(evt.target) : stateMachine.mouseover.toUnselectedState(evt.target);
+                }
+            }, false);
+            gMouseoverAreas.addEventListener("click", function(evt) {
+                stateMachine.fromSelected ? stateMachine.mouseover.toUnselectedState(evt.target) : stateMachine.mouseover.toSelectedState(evt.target);
+            }, false);
+            gMouseoverTexts.addEventListener("click", function(evt) {
+                stateMachine.fromSelected ? stateMachine.mouseover.toUnselectedState(areas[evt.target.id]) : stateMachine.mouseover.toSelectedState(areas[evt.target.id]);
+            }, false);
+	});
+	
+	// ]]>
+    </script>
+    <defs>
+        <filter id="unselected-shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+            <feOffset in="blur" dx="0" dy="0" result="offsetBlur"/>
+            <feMerge>
+                <feMergeNode in="offsetBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <filter id="mouseover-shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+            <feOffset in="blur" dx="-5" dy="5" result="offsetBlur"/>
+            <feMerge>
+                <feMergeNode in="offsetBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <filter id="text-shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+            <feOffset in="blur" dx="0" dy="0" result="offsetBlur"/>
+            <feMerge>
+                <feMergeNode in="offsetBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <linearGradient id="grmouseover" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" style="stop-color:#d40000;"></stop>
+            <stop offset="1" style="stop-color:red;"></stop>
+        </linearGradient>
+        <linearGradient id="grselected" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" style="stop-color:#ffc821;"></stop>
+            <stop offset="1" style="stop-color:#faf100;"></stop>
+        </linearGradient>
+        <g id="gDefsTexts">
+            <text x="140" y="34">Nuñez</text>
+            <text x="86" y="53">Saavedra</text>
+            <text x="158" y="64">Belgrano</text>
+            <text x="223" y="101">Palermo</text>
+            <text x="113" y="68">Coghlan</text>
+            <text x="86" y="96">Villa Urquiza</text>
+            <text x="164" y="104">Colegiales</text>
+            <text x="61" y="122">Villa Pueyrredón</text>
+            <text x="276" y="130">Recoleta</text>
+            <text x="322" y="129">Retiro</text>
+            <text x="129" y="122">Villa Ortuzar</text>
+            <text x="106" y="130">Parque Chas</text>
+            <text x="156" y="140">Chacarita</text>
+            <text x="38" y="169">Villa Devoto</text>
+            <text x="83" y="148">Agronomía</text>
+            <text x="184" y="158">Villa Crespo</text>
+            <text x="356" y="190">Puerto Madero</text>
+            <text x="131" y="159">Paternal</text>
+            <text x="314" y="174">San Nicolas</text>
+            <text x="223" y="191">Almagro</text>
+            <text x="85" y="183">Villa del Parque</text>
+            <text x="265" y="192">Balvanera</text>
+            <text x="128" y="194">Villa Gral. Mitre</text>
+            <text x="179" y="210">Caballito</text>
+            <text x="316" y="200">Monserrat</text>
+            <text x="98" y="209">Villa Santa Rita</text>
+            <text x="49" y="215">Monte Castro</text>
+            <text x="16" y="216">Villa Real</text>
+            <text x="150" y="256">Flores</text>
+            <text x="332" y="223">San Telmo</text>
+            <text x="96" y="238">Floresta</text>
+            <text x="303" y="232">Constitución</text>
+            <text x="266" y="229">San Cristobal</text>
+            <text x="231" y="244">Boedo</text>
+            <text x="78" y="246">Velez Sarsfield</text>
+            <text x="26" y="241">Versalles</text>
+            <text x="60" y="256">Villa Luro</text>
+            <text x="348" y="260">Boca</text>
+            <text x="303" y="278">Barracas</text>
+            <text x="189" y="260">Parque Chacabuco</text>
+            <text x="261" y="264">Parque Patricios</text>
+            <text x="34" y="275">Liniers</text>
+            <text x="108" y="294">Parque Avellaneda</text>
+            <text x="227" y="293">Nueva Pompeya</text>
+            <text x="65" y="309">Mataderos</text>
+            <text x="171" y="333">Villa Soldati</text>
+            <text x="113" y="344">Villa Lugano</text>
+            <text x="139" y="381">Villa Riachuelo</text>
+        </g>
+    </defs>
+    <g id="gAreas" style="fill:white; stroke:black; stroke-width:1px; stroke-linecap:butt; stroke-linejoin:miter; stroke-opacity:1;">
+        <g id="gUnselectedAreas">
+            <path id="Nuñez" d="M 137 3 166 25 157 45 127 65 117 50 126 41 113 15 Z"></path>
+            <path id="Saavedra" d="M 113 15 126 41 117 50 117 53 113 51 80 73 76 71 45 91 64 39 Z"></path>
+            <path id="Belgrano" d="M 166 25 184 35 197 50 184 62 185 73 170 87 159 83 141 103 132 99 127 99 118 85 130 73 127 65 157 45 Z"></path>
+            <path id="Palermo" d="M 211 41 218 42 220 49 227 49 251 65 260 79 264 79 270 77 274 81 270 87 270 90 274 91 268 109 275 117 269 130 258 129 241 153 238 161 216 161 193 139 179 131 179 125 187 117 182 107 185 99 170 87 185 73 183 63 197 51 202 50 Z"></path>
+            <path id="Coghlan" d="M 117 50 127 65 130 73 118 85 113 85 98 71 96 63 113 51 117 53 Z"></path>
+            <path id="Villa_Urquiza" d="M 96 63 98 71 113 85 118 85 127 99 110 113 105 118 88 129 77 117 74 117 54 98 45 91 76 71 80 73 Z"></path>
+            <path id="Colegiales" d="M 159 83 170 87 185 99 182 107 187 117 179 125 146 117 141 103 Z"></path>
+            <path id="Villa_Pueyrredón" d="M 45 91 54 98 74 117 77 117 88 129 54 153 47 143 47 139 34 121 Z"></path>
+            <path id="Recoleta" d="M 274 91 276 94 279 97 286 99 299 109 301 117 303 117 313 121 296 149 298 153 298 165 293 169 286 169 272 169 263 165 259 166 245 165 238 161 241 153 258 129 269 130 275 117 268 109 Z"></path>
+            <path id="Retiro" d="M 290 93 308 93 337 117 344 119 349 121 351 125 353 135 338 143 342 151 338 157 331 163 298 165 298 153 296 149 313 121 303 117 301 117 299 109 302 109 304 107 303 103 Z"></path>
+            <path id="Villa_Ortuzar" d="M 127 99 132 99 141 103 146 117 145 135 133 145 123 138 117 121 113 119 111 113 Z"></path>
+            <path id="Parque_Chas" d="M 111 113 113 119 117 121 123 138 114 145 112 146 98 145 88 129 105 118 Z"></path>
+            <path id="Chacarita" d="M 146 117 179 125 179 131 175 145 153 163 145 159 135 161 137 151 133 145 145 135 Z"></path>
+            <path id="Villa_Devoto" d="M 34 121 47 139 47 143 54 153 67 161 53 173 62 191 28 217 8 195 Z"></path>
+            <path id="Agronomía" d="M 88 129 98 145 112 146 108 166 99 161 67 161 54 153 Z"></path>
+            <path id="Villa_Crespo" d="M 179 131 193 139 216 161 210 165 201 175 180 185 166 185 151 179 154 173 153 163 175 145 Z"></path>
+            <path id="Puerto_Madero" d="M 353 135 366 177 373 185 367 201 367 229 365 245 350 229 347 229 345 221 345 213 344 209 344 189 341 186 341 167 338 157 342 153 338 143 Z"></path>
+            <path id="Paternal" d="M 123 138 133 145 137 151 135 161 145 159 153 163 153 163 154 173 151 179 128 173 117 179 108 166 112 146 114 145 Z"></path>
+            <path id="San_Nicolas" d="M 338 157 341 167 341 186 315 187 314 189 288 191 286 169 293 169 298 165 331 163 Z"></path>
+            <path id="Almagro" d="M 216 161 238 161 245 165 242 189 238 197 243 201 245 219 213 221 211 209 207 207 207 185 201 175 210 165 Z"></path>
+            <path id="Villa_del_Parque" d="M 67 161 99 161 108 166 117 179 111 186 106 189 87 193 75 205 62 191 53 173 Z"></path>
+            <path id="Balvanera" d="M 245 165 259 166 263 165 272 169 286 169 288 191 287 213 261 215 245 219 243 201 238 197 242 189 Z"></path>
+            <path id="Villa_Gral._Mitre" d="M 128 173 151 179 142 189 147 203 122 214 106 189 111 186 117 179 Z"></path>
+            <path id="Caballito" d="M 201 175 207 185 207 207 211 209 213 221 215 235 166 245 147 203 142 189 151 179 166 185 180 185 Z"></path>
+            <path id="Monserrat" d="M 341 186 344 189 344 209 317 208 316 212 287 213 288 191 314 189 315 187 Z"></path>
+            <path id="Villa_Santa_Rita" d="M 106 189 122 214 109 223 99 229 74 206 87 193 Z"></path>
+            <path id="Monte_Castro" d="M 62 191 75 205 79 209 69 222 61 225 50 237 41 229 30 238 18 226 28 217 Z"></path>
+            <path id="Villa_Real" d="M 8 195 28 217 18 226 7 236 3 209 Z"></path>
+            <path id="Flores" d="M 147 203 166 245 159 246 167 265 178 274 180 271 185 277 191 285 180 295 170 293 169 296 158 294 143 309 132 296 139 284 127 274 122 259 109 223 122 214 Z"></path>
+            <path id="San_Telmo" d="M 317 208 344 209 345 213 345 221 347 229 335 232 337 234 335 236 333 237 330 237 329 235 319 234 316 212 Z"></path>
+            <path id="Floresta" d="M 79 209 99 229 109 223 122 259 112 266 69 222 Z"></path>
+            <path id="Constitución" d="M 316 212 319 234 319 235 314 240 311 248 309 243 302 249 289 252 286 237 287 213 Z"></path>
+            <path id="San_Cristobal" d="M 287 213 286 237 264 240 246 244 245 219 261 215 Z"></path>
+            <path id="Boedo" d="M 245 219 246 244 245 251 247 254 248 261 244 265 238 265 219 268 215 235 213 221 Z"></path>
+            <path id="Velez_Sarsfield" d="M 69 222 106 260 89 270 66 246 59 247 50 237 61 225 Z"></path>
+            <path id="Versalles" d="M 18 226 45 255 41 254 39 253 36 253 31 252 26 252 21 253 18 254 13 252 10 250 9 246 7 236 Z"></path>
+            <path id="Villa_Luro" d="M 41 229 50 237 59 247 66 246 89 270 73 280 69 276 58 282 40 265 41 254 45 255 30 238 Z"></path>
+            <path id="Boca" d="M 347 229 350 229 365 245 366 252 366 254 365 256 364 258 363 261 361 263 358 264 355 265 351 265 349 266 349 268 349 270 351 270 354 272 355 273 357 275 357 278 357 278 355 281 353 282 346 289 336 290 330 237 333 237 335 236 337 234 335 232 Z"></path>
+            <path id="Barracas" d="M 319 234 329 235 330 237 336 290 335 293 331 294 331 300 333 302 326 304 323 309 315 309 314 312 300 311 290 321 285 321 277 320 276 316 272 314 269 289 273 282 286 276 286 271 289 269 289 252 302 249 309 243 311 248 314 240 319 235 Z"></path>
+            <path id="Parque_Chacabuco" d="M 215 235 219 268 203 272 202 280 191 285 185 277 180 271 178 274 167 265 159 246 166 245 Z"></path>
+            <path id="Parque_Patricios" d="M 286 237 289 252 289 269 286 271 286 276 273 282 245 290 242 277 244 265 248 261 247 254 245 251 246 244 264 240 Z"></path>
+            <path id="Liniers" d="M 10 250 13 252 18 254 21 253 26 252 31 252 36 253 39 253 41 254 40 265 58 282 23 299 19 296 Z"></path>
+            <path id="Parque_Avellaneda" d="M 122 259 127 274 139 284 132 296 143 309 125 328 106 313 73 280 89 270 106 260 112 266 Z"></path>
+            <path id="Nueva_Pompeya" d="M 238 265 244 265 242 277 245 290 273 282 269 289 272 314 270 319 258 319 255 316 251 314 247 313 240 312 234 313 230 314 223 317 217 321 214 314 198 300 190 306 180 295 191 285 202 280 203 272 219 268 Z"></path>
+            <path id="Mataderos" d="M 69 276 73 280 106 313 91 325 87 322 77 338 70 342 23 299 58 282 Z"></path>
+            <path id="Villa_Soldati" d="M 158 294 169 296 170 293 180 295 190 306 198 300 214 314 217 321 215 324 212 326 209 330 206 334 202 340 199 345 194 353 191 357 190 359 187 358 175 371 155 354 125 328 143 309 Z"></path>
+            <path id="Villa_Lugano" d="M 106 313 125 328 155 354 136 375 117 358 102 372 70 342 77 338 87 322 91 325 Z"></path>
+            <path id="Villa_Riachuelo" d="M 155 354 175 371 142 408 102 372 117 358 136 375 Z"></path>
+        </g>
+        <g id="gSelectedAreas" style="stroke:maroon; stroke-width:2px; fill:url(#grselected);"></g>
+        <g id="gMouseoverAreas" style="fill:url(#grmouseover);"></g>
+    </g>
+    <g id="gTexts" style="stroke:#888888; stroke-width:0.5px; font-family:sans-serif; font-size:13px; font-weight:bold; fill:white; text-anchor:middle;">
+        <g id="gSelectedTexts"></g>
+        <g id="gMouseoverTexts"></g>
+    </g>
+</svg>
