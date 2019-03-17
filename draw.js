@@ -7,20 +7,21 @@ if (!ar.com.propinmueble.geomap) ar.com.propinmueble.geomap = {};
 
 (function() {
     var GEOMAP_BORDER_COLOR = "black";
-    var GEOMAP_SHADOW_COLOR = "white";
+    var GEOMAP_UNSELECTED_FILL_COLOR = "white";
+    var GEOMAP_SHADOW_COLOR = "black";
     var GEOMAP_SHADOW_BLUR = 10;
     var FONT = "bold 13px sans-serif";
     var FONT_COLOR = "white"
     var FONT_BORDER_COLOR = "black";
     var SHADOW_BLUR = 10;
-    var MOUSE_OVER_AREA_GRADIENT_COLOR_1 = "#d40000";
-    var MOUSE_OVER_AREA_GRADIENT_COLOR_2 = "red";
+    var MOUSE_OVER_AREA_GRADIENT_COLOR_1 = "red";
+    var MOUSE_OVER_AREA_GRADIENT_COLOR_2 = "#BF0000";
     var MOUSE_OVER_AREA_SHADOW_OFFSET_X = -5;
     var MOUSE_OVER_AREA_SHADOW_OFFSET_Y = 5;
     var TEXT_SHADOW_OFFSET_X = 0;
     var TEXT_SHADOW_OFFSET_Y = 0;
-    var SELECTED_AREA_GRADIENT_COLOR_1 = "#ffc821";
-    var SELECTED_AREA_GRADIENT_COLOR_2 = "#faf100";
+    var SELECTED_AREA_GRADIENT_COLOR_1 = "#faf100";
+    var SELECTED_AREA_GRADIENT_COLOR_2 = "#ffc821";
     var SELECTED_AREA_BORDER_COLOR = "maroon";
     var SELECTED_AREA_BORDER_WIDTH = 2;
     
@@ -55,6 +56,7 @@ if (!ar.com.propinmueble.geomap) ar.com.propinmueble.geomap = {};
         context.save();
         context.shadowColor = GEOMAP_SHADOW_COLOR;
         context.shadowBlur = GEOMAP_SHADOW_BLUR;
+        context.fillStyle = GEOMAP_UNSELECTED_FILL_COLOR;
         context.fill();
         context.strokeStyle = GEOMAP_BORDER_COLOR;
         context.stroke();
@@ -64,10 +66,10 @@ if (!ar.com.propinmueble.geomap) ar.com.propinmueble.geomap = {};
     
     function drawText(context, area) {
         context.save();
-        context.shadowColor = GEOMAP_BORDER_COLOR;
+        context.shadowColor = GEOMAP_SHADOW_COLOR;
         context.shadowOffsetX = TEXT_SHADOW_OFFSET_X;
         context.shadowOffsetY = TEXT_SHADOW_OFFSET_Y;
-        context.shadowBlur = SHADOW_BLUR;
+        context.shadowBlur = SHADOW_BLUR/2;
         var fontX = (area.east + area.west - context.measureText(area.name).width)/2;
         fontX = fontX < 0 ? SHADOW_BLUR/2 : fontX;
         var fontY = (area.south + area.north)/2;
@@ -90,7 +92,7 @@ if (!ar.com.propinmueble.geomap) ar.com.propinmueble.geomap = {};
     function drawMouseOverArea(context, area) {
         drawPath(context, area);
         context.save();
-        context.shadowColor = GEOMAP_BORDER_COLOR;
+        context.shadowColor = GEOMAP_SHADOW_COLOR;
         context.shadowBlur = SHADOW_BLUR;
         context.shadowOffsetX = MOUSE_OVER_AREA_SHADOW_OFFSET_X;
         context.shadowOffsetY = MOUSE_OVER_AREA_SHADOW_OFFSET_Y;
