@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/css" href="../src/area-map.css"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="area-map" data-am-map="caba-barrios" width="800" height="881" viewBox="0 0 800 881" role="group" aria-labelledby="caba-barrios-title">
-<title id="caba-barrios-title">Barrios de la Ciudad de Buenos Aires</title>
-<desc>Fuente: Buenos Aires Data (GCBA), dataset Barrios.</desc>
+<title id="caba-barrios-title">Neighbourhoods of Buenos Aires</title>
+<desc>Source: Buenos Aires Data (GCBA), Barrios dataset.</desc>
 <defs>
 <linearGradient id="am-grad-selected" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="am-stop-selected-start" stop-color="#faf100"/><stop offset="1" class="am-stop-selected-end" stop-color="#ffc821"/></linearGradient>
 <linearGradient id="am-grad-hover" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="am-stop-hover-start" stop-color="#ff0000"/><stop offset="1" class="am-stop-hover-end" stop-color="#bf0000"/></linearGradient>
@@ -159,7 +159,7 @@
 <use class="am-selected" data-area="villa-urquiza" data-selected="false" xlink:href="#caba-barrios-geo-villa-urquiza" fill="url(#am-grad-selected)" stroke="#800000" stroke-width="2" fill-rule="evenodd" visibility="hidden"/>
 </g>
 <g class="am-labels">
-<text class="am-label" data-area="agronomia" x="185.7" y="332.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Agronomia</text>
+<text class="am-label" data-area="agronomia" x="185.7" y="332.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Agronomía</text>
 <text class="am-label" data-area="almagro" x="444.8" y="408.9" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Almagro</text>
 <text class="am-label" data-area="balvanera" x="517.2" y="408.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Balvanera</text>
 <text class="am-label" data-area="barracas" x="589.9" y="583.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Barracas</text>
@@ -170,7 +170,7 @@
 <text class="am-label" data-area="chacarita" x="319.3" y="310.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Chacarita</text>
 <text class="am-label" data-area="coghlan" x="238.9" y="180.4" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Coghlan</text>
 <text class="am-label" data-area="colegiales" x="331.7" y="246.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Colegiales</text>
-<text class="am-label" data-area="constitucion" x="589.5" y="483.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Constitucion</text>
+<text class="am-label" data-area="constitucion" x="589.5" y="483.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Constitución</text>
 <text class="am-label" data-area="flores" x="303.5" y="538.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Flores</text>
 <text class="am-label" data-area="floresta" x="205.4" y="495.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Floresta</text>
 <text class="am-label" data-area="liniers" x="68" y="571.5" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Liniers</text>
@@ -178,7 +178,7 @@
 <text class="am-label" data-area="monserrat" x="607.8" y="425.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Monserrat</text>
 <text class="am-label" data-area="monte-castro" x="116.5" y="456.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Monte Castro</text>
 <text class="am-label" data-area="nueva-pompeya" x="455.9" y="603.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Nueva Pompeya</text>
-<text class="am-label" data-area="nunez" x="286.8" y="98.9" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Nuñez</text>
+<text class="am-label" data-area="nunez" x="286.8" y="98.9" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Núñez</text>
 <text class="am-label" data-area="palermo" x="442.6" y="242.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Palermo</text>
 <text class="am-label" data-area="parque-avellaneda" x="233.1" y="594.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Parque Avellaneda</text>
 <text class="am-label" data-area="parque-chacabuco" x="383.1" y="534.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Parque Chacabuco</text>
@@ -189,19 +189,19 @@
 <text class="am-label" data-area="recoleta" x="548.6" y="298.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Recoleta</text>
 <text class="am-label" data-area="retiro" x="621.9" y="311" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Retiro</text>
 <text class="am-label" data-area="saavedra" x="185.5" y="145" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Saavedra</text>
-<text class="am-label" data-area="san-cristobal" x="521.7" y="477.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Cristobal</text>
-<text class="am-label" data-area="san-nicolas" x="604.4" y="382.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Nicolas</text>
+<text class="am-label" data-area="san-cristobal" x="521.7" y="477.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Cristóbal</text>
+<text class="am-label" data-area="san-nicolas" x="604.4" y="382.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Nicolás</text>
 <text class="am-label" data-area="san-telmo" x="639.2" y="466.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Telmo</text>
-<text class="am-label" data-area="velez-sarsfield" x="168" y="513" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Velez Sarsfield</text>
+<text class="am-label" data-area="velez-sarsfield" x="168" y="513" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Vélez Sarsfield</text>
 <text class="am-label" data-area="versalles" x="55.2" y="507.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Versalles</text>
 <text class="am-label" data-area="villa-crespo" x="363.7" y="360" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Crespo</text>
-<text class="am-label" data-area="villa-del-parque" x="178.1" y="385.5" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Del Parque</text>
+<text class="am-label" data-area="villa-del-parque" x="178.1" y="385.5" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa del Parque</text>
 <text class="am-label" data-area="villa-devoto" x="86.7" y="376.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Devoto</text>
 <text class="am-label" data-area="villa-gral-mitre" x="262.1" y="412.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Gral. Mitre</text>
 <text class="am-label" data-area="villa-lugano" x="234.2" y="718.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Lugano</text>
 <text class="am-label" data-area="villa-luro" x="131.4" y="536.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Luro</text>
-<text class="am-label" data-area="villa-ortuzar" x="267.2" y="276.1" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Ortuzar</text>
-<text class="am-label" data-area="villa-pueyrredon" x="128.4" y="281.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Pueyrredon</text>
+<text class="am-label" data-area="villa-ortuzar" x="267.2" y="276.1" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Ortúzar</text>
+<text class="am-label" data-area="villa-pueyrredon" x="128.4" y="281.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Pueyrredón</text>
 <text class="am-label" data-area="villa-real" x="42.3" y="457.1" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Real</text>
 <text class="am-label" data-area="villa-riachuelo" x="283.8" y="797.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Riachuelo</text>
 <text class="am-label" data-area="villa-santa-rita" x="207.9" y="441.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Santa Rita</text>
@@ -209,7 +209,7 @@
 <text class="am-label" data-area="villa-urquiza" x="189" y="231.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Urquiza</text>
 </g>
 <g class="am-hits">
-<g class="am-hit" data-area="agronomia" role="checkbox" aria-checked="false" aria-label="Agronomia" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-agronomia" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="agronomia" x="185.7" y="332.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Agronomia</text><use class="am-target" xlink:href="#caba-barrios-geo-agronomia" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="agronomia" role="checkbox" aria-checked="false" aria-label="Agronomía" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-agronomia" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="agronomia" x="185.7" y="332.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Agronomía</text><use class="am-target" xlink:href="#caba-barrios-geo-agronomia" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="almagro" role="checkbox" aria-checked="false" aria-label="Almagro" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-almagro" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="almagro" x="444.8" y="408.9" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Almagro</text><use class="am-target" xlink:href="#caba-barrios-geo-almagro" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="balvanera" role="checkbox" aria-checked="false" aria-label="Balvanera" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-balvanera" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="balvanera" x="517.2" y="408.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Balvanera</text><use class="am-target" xlink:href="#caba-barrios-geo-balvanera" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="barracas" role="checkbox" aria-checked="false" aria-label="Barracas" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-barracas" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="barracas" x="589.9" y="583.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Barracas</text><use class="am-target" xlink:href="#caba-barrios-geo-barracas" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
@@ -220,7 +220,7 @@
 <g class="am-hit" data-area="chacarita" role="checkbox" aria-checked="false" aria-label="Chacarita" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-chacarita" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="chacarita" x="319.3" y="310.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Chacarita</text><use class="am-target" xlink:href="#caba-barrios-geo-chacarita" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="coghlan" role="checkbox" aria-checked="false" aria-label="Coghlan" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-coghlan" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="coghlan" x="238.9" y="180.4" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Coghlan</text><use class="am-target" xlink:href="#caba-barrios-geo-coghlan" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="colegiales" role="checkbox" aria-checked="false" aria-label="Colegiales" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-colegiales" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="colegiales" x="331.7" y="246.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Colegiales</text><use class="am-target" xlink:href="#caba-barrios-geo-colegiales" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="constitucion" role="checkbox" aria-checked="false" aria-label="Constitucion" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-constitucion" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="constitucion" x="589.5" y="483.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Constitucion</text><use class="am-target" xlink:href="#caba-barrios-geo-constitucion" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="constitucion" role="checkbox" aria-checked="false" aria-label="Constitución" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-constitucion" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="constitucion" x="589.5" y="483.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Constitución</text><use class="am-target" xlink:href="#caba-barrios-geo-constitucion" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="flores" role="checkbox" aria-checked="false" aria-label="Flores" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-flores" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="flores" x="303.5" y="538.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Flores</text><use class="am-target" xlink:href="#caba-barrios-geo-flores" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="floresta" role="checkbox" aria-checked="false" aria-label="Floresta" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-floresta" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="floresta" x="205.4" y="495.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Floresta</text><use class="am-target" xlink:href="#caba-barrios-geo-floresta" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="liniers" role="checkbox" aria-checked="false" aria-label="Liniers" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-liniers" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="liniers" x="68" y="571.5" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Liniers</text><use class="am-target" xlink:href="#caba-barrios-geo-liniers" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
@@ -228,7 +228,7 @@
 <g class="am-hit" data-area="monserrat" role="checkbox" aria-checked="false" aria-label="Monserrat" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-monserrat" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="monserrat" x="607.8" y="425.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Monserrat</text><use class="am-target" xlink:href="#caba-barrios-geo-monserrat" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="monte-castro" role="checkbox" aria-checked="false" aria-label="Monte Castro" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-monte-castro" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="monte-castro" x="116.5" y="456.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Monte Castro</text><use class="am-target" xlink:href="#caba-barrios-geo-monte-castro" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="nueva-pompeya" role="checkbox" aria-checked="false" aria-label="Nueva Pompeya" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-nueva-pompeya" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="nueva-pompeya" x="455.9" y="603.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Nueva Pompeya</text><use class="am-target" xlink:href="#caba-barrios-geo-nueva-pompeya" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="nunez" role="checkbox" aria-checked="false" aria-label="Nuñez" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-nunez" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="nunez" x="286.8" y="98.9" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Nuñez</text><use class="am-target" xlink:href="#caba-barrios-geo-nunez" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="nunez" role="checkbox" aria-checked="false" aria-label="Núñez" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-nunez" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="nunez" x="286.8" y="98.9" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Núñez</text><use class="am-target" xlink:href="#caba-barrios-geo-nunez" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="palermo" role="checkbox" aria-checked="false" aria-label="Palermo" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-palermo" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="palermo" x="442.6" y="242.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Palermo</text><use class="am-target" xlink:href="#caba-barrios-geo-palermo" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="parque-avellaneda" role="checkbox" aria-checked="false" aria-label="Parque Avellaneda" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-parque-avellaneda" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="parque-avellaneda" x="233.1" y="594.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Parque Avellaneda</text><use class="am-target" xlink:href="#caba-barrios-geo-parque-avellaneda" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="parque-chacabuco" role="checkbox" aria-checked="false" aria-label="Parque Chacabuco" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-parque-chacabuco" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="parque-chacabuco" x="383.1" y="534.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Parque Chacabuco</text><use class="am-target" xlink:href="#caba-barrios-geo-parque-chacabuco" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
@@ -239,19 +239,19 @@
 <g class="am-hit" data-area="recoleta" role="checkbox" aria-checked="false" aria-label="Recoleta" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-recoleta" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="recoleta" x="548.6" y="298.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Recoleta</text><use class="am-target" xlink:href="#caba-barrios-geo-recoleta" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="retiro" role="checkbox" aria-checked="false" aria-label="Retiro" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-retiro" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="retiro" x="621.9" y="311" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Retiro</text><use class="am-target" xlink:href="#caba-barrios-geo-retiro" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="saavedra" role="checkbox" aria-checked="false" aria-label="Saavedra" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-saavedra" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="saavedra" x="185.5" y="145" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Saavedra</text><use class="am-target" xlink:href="#caba-barrios-geo-saavedra" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="san-cristobal" role="checkbox" aria-checked="false" aria-label="San Cristobal" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-san-cristobal" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="san-cristobal" x="521.7" y="477.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Cristobal</text><use class="am-target" xlink:href="#caba-barrios-geo-san-cristobal" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="san-nicolas" role="checkbox" aria-checked="false" aria-label="San Nicolas" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-san-nicolas" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="san-nicolas" x="604.4" y="382.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Nicolas</text><use class="am-target" xlink:href="#caba-barrios-geo-san-nicolas" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="san-cristobal" role="checkbox" aria-checked="false" aria-label="San Cristóbal" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-san-cristobal" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="san-cristobal" x="521.7" y="477.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Cristóbal</text><use class="am-target" xlink:href="#caba-barrios-geo-san-cristobal" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="san-nicolas" role="checkbox" aria-checked="false" aria-label="San Nicolás" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-san-nicolas" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="san-nicolas" x="604.4" y="382.8" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Nicolás</text><use class="am-target" xlink:href="#caba-barrios-geo-san-nicolas" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="san-telmo" role="checkbox" aria-checked="false" aria-label="San Telmo" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-san-telmo" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="san-telmo" x="639.2" y="466.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">San Telmo</text><use class="am-target" xlink:href="#caba-barrios-geo-san-telmo" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="velez-sarsfield" role="checkbox" aria-checked="false" aria-label="Velez Sarsfield" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-velez-sarsfield" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="velez-sarsfield" x="168" y="513" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Velez Sarsfield</text><use class="am-target" xlink:href="#caba-barrios-geo-velez-sarsfield" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="velez-sarsfield" role="checkbox" aria-checked="false" aria-label="Vélez Sarsfield" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-velez-sarsfield" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="velez-sarsfield" x="168" y="513" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Vélez Sarsfield</text><use class="am-target" xlink:href="#caba-barrios-geo-velez-sarsfield" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="versalles" role="checkbox" aria-checked="false" aria-label="Versalles" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-versalles" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="versalles" x="55.2" y="507.2" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Versalles</text><use class="am-target" xlink:href="#caba-barrios-geo-versalles" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-crespo" role="checkbox" aria-checked="false" aria-label="Villa Crespo" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-crespo" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-crespo" x="363.7" y="360" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Crespo</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-crespo" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="villa-del-parque" role="checkbox" aria-checked="false" aria-label="Villa Del Parque" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-del-parque" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-del-parque" x="178.1" y="385.5" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Del Parque</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-del-parque" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="villa-del-parque" role="checkbox" aria-checked="false" aria-label="Villa del Parque" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-del-parque" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-del-parque" x="178.1" y="385.5" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa del Parque</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-del-parque" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-devoto" role="checkbox" aria-checked="false" aria-label="Villa Devoto" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-devoto" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-devoto" x="86.7" y="376.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Devoto</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-devoto" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-gral-mitre" role="checkbox" aria-checked="false" aria-label="Villa Gral. Mitre" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-gral-mitre" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-gral-mitre" x="262.1" y="412.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Gral. Mitre</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-gral-mitre" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-lugano" role="checkbox" aria-checked="false" aria-label="Villa Lugano" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-lugano" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-lugano" x="234.2" y="718.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Lugano</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-lugano" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-luro" role="checkbox" aria-checked="false" aria-label="Villa Luro" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-luro" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-luro" x="131.4" y="536.7" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Luro</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-luro" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="villa-ortuzar" role="checkbox" aria-checked="false" aria-label="Villa Ortuzar" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-ortuzar" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-ortuzar" x="267.2" y="276.1" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Ortuzar</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-ortuzar" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
-<g class="am-hit" data-area="villa-pueyrredon" role="checkbox" aria-checked="false" aria-label="Villa Pueyrredon" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-pueyrredon" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-pueyrredon" x="128.4" y="281.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Pueyrredon</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-pueyrredon" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="villa-ortuzar" role="checkbox" aria-checked="false" aria-label="Villa Ortúzar" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-ortuzar" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-ortuzar" x="267.2" y="276.1" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Ortúzar</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-ortuzar" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
+<g class="am-hit" data-area="villa-pueyrredon" role="checkbox" aria-checked="false" aria-label="Villa Pueyrredón" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-pueyrredon" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-pueyrredon" x="128.4" y="281.3" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Pueyrredón</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-pueyrredon" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-real" role="checkbox" aria-checked="false" aria-label="Villa Real" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-real" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-real" x="42.3" y="457.1" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Real</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-real" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-riachuelo" role="checkbox" aria-checked="false" aria-label="Villa Riachuelo" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-riachuelo" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-riachuelo" x="283.8" y="797.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Riachuelo</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-riachuelo" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
 <g class="am-hit" data-area="villa-santa-rita" role="checkbox" aria-checked="false" aria-label="Villa Santa Rita" tabindex="0"><use class="am-hover" xlink:href="#caba-barrios-geo-villa-santa-rita" fill="url(#am-grad-hover)" fill-rule="evenodd" filter="url(#am-shadow-hover)" visibility="hidden"/><text class="am-hit-label" data-area="villa-santa-rita" x="207.9" y="441.6" dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" filter="url(#am-shadow-label)" visibility="hidden">Villa Santa Rita</text><use class="am-target" xlink:href="#caba-barrios-geo-villa-santa-rita" fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/></g>
@@ -260,46 +260,65 @@
 </g>
 <script type="text/javascript"><![CDATA[
 /*!
- * area-map runtime: lógica de selección de los SVG generados por
+ * area-map runtime: selection logic for the SVG maps generated by
  * tools/geojson-to-svg.mjs.
  *
- * El generador mete este archivo dentro de cada SVG, así que el mapa funciona
- * solo. Si incrustás el SVG con innerHTML o desde un framework (en ese caso el
- * navegador no ejecuta los <script> internos), incluí este mismo archivo con
- * <script src="area-map.js"></script> o llamá a AreaMap.init(svgElement).
+ * The generator embeds this file inside every SVG, so a map works on its own.
+ * Include it in the host page as well (<script src="area-map.js"></script>)
+ * when:
+ *   - the SVG is inserted with innerHTML or by a framework (browsers do not
+ *     run <script> tags inserted that way), or
+ *   - the SVG is loaded with <object>/<iframe> and you want external
+ *     checkboxes to stay in sync with it.
  *
- * Está escrito en ES5 a propósito, para que ande en la mayor cantidad posible
- * de navegadores y visores de SVG.
+ * Written in ES5 on purpose, so it runs in as many browsers and SVG viewers
+ * as possible.
  *
- * API (en cada <svg class="area-map">, propiedad .areaMap):
- *   svg.areaMap.select(id, true|false)   selecciona o deselecciona un área
- *   svg.areaMap.toggle(id)                alterna un área
- *   svg.areaMap.clear()                   deselecciona todo
- *   svg.areaMap.selected()                ids seleccionados (array)
- *   svg.areaMap.areas()                   [{id, name}] de todas las áreas
+ * ---------------------------------------------------------------------------
+ * External checkboxes (no code needed)
+ * ---------------------------------------------------------------------------
+ *   <input type="checkbox" data-area-map="caba-barrios" value="palermo">
  *
- * Evento: "areachange" (burbujea), con
- *   event.detail = {id, name, selected, selection: [ids]}
+ * Any checkbox (or radio button) whose data-area-map matches the map id
+ * (the data-am-map attribute of the <svg>, set with --map-id) and whose value
+ * is an area id stays in sync both ways: clicking the map checks the box, and
+ * checking the box selects the area. Boxes that are already checked when the
+ * page loads (e.g. a form restored by the browser) select their areas.
  *
- * Si el SVG se carga con <object> o <iframe>, también avisa al padre con
+ * ---------------------------------------------------------------------------
+ * JavaScript API (property .areaMap of every <svg class="area-map">)
+ * ---------------------------------------------------------------------------
+ *   svg.areaMap.select(id[, true|false])  select or deselect an area
+ *   svg.areaMap.toggle(id)                toggle an area
+ *   svg.areaMap.clear()                   deselect everything
+ *   svg.areaMap.selected()                selected ids (array)
+ *   svg.areaMap.areas()                   [{id, name}] of every area
+ *
+ * Event "areachange" (bubbles), fired when the user changes the selection:
+ *   event.detail = {map, id, name, selected, selection: [ids]}
+ *
+ * When the SVG is loaded with <object> or <iframe> it also tells the parent
+ * page:
  *   postMessage({type: "area-map:change", map, id, name, selected, selection})
- * y acepta
- *   postMessage({type: "area-map:select", map?, ids: [...]})
- * para fijar la selección desde afuera.
+ * and accepts
+ *   postMessage({type: "area-map:select", map, ids: [...]})
+ * to replace the selection from outside.
  */
 (function (global) {
   "use strict";
 
   var SVG_NS = "http://www.w3.org/2000/svg";
+  var doc = global.document;
+  if (!doc) return;
 
   function hasClass(el, name) {
     var c = el && el.getAttribute && el.getAttribute("class");
     return !!c && (" " + c + " ").indexOf(" " + name + " ") !== -1;
   }
 
-  // Sube desde el target del evento hasta el <g class="am-hit">.
-  // correspondingUseElement cubre navegadores viejos que devuelven
-  // SVGElementInstance como target dentro de un <use>.
+  // Walks up from an event target to the area's <g class="am-hit">.
+  // correspondingUseElement covers old browsers that report an
+  // SVGElementInstance as the target inside a <use>.
   function findHit(node, root) {
     while (node && node !== root) {
       if (node.correspondingUseElement) node = node.correspondingUseElement;
@@ -314,10 +333,67 @@
     try {
       ev = new CustomEvent(name, { bubbles: true, detail: detail });
     } catch (e) {
-      ev = document.createEvent("CustomEvent");
+      ev = doc.createEvent("CustomEvent");
       ev.initCustomEvent(name, true, false, detail);
     }
     return ev;
+  }
+
+  function isAreaInput(el) {
+    return !!el && el.nodeName && el.nodeName.toLowerCase() === "input" &&
+      (el.type === "checkbox" || el.type === "radio") && !!el.getAttribute("data-area-map");
+  }
+
+  // Inputs bound to a map, anywhere in the page.
+  function inputsFor(mapId) {
+    var out = [];
+    var list = doc.getElementsByTagName("input");
+    for (var i = 0; i < list.length; i++) {
+      if (isAreaInput(list[i]) && list[i].getAttribute("data-area-map") === mapId) out.push(list[i]);
+    }
+    return out;
+  }
+
+  function syncInputs(mapId, selection) {
+    var wanted = {};
+    for (var i = 0; i < selection.length; i++) wanted[selection[i]] = true;
+    var inputs = inputsFor(mapId);
+    for (i = 0; i < inputs.length; i++) inputs[i].checked = !!wanted[inputs[i].value];
+  }
+
+  function checkedIds(mapId) {
+    var out = [];
+    var inputs = inputsFor(mapId);
+    for (var i = 0; i < inputs.length; i++) if (inputs[i].checked) out.push(inputs[i].value);
+    return out;
+  }
+
+  // Inline maps in this document, by map id.
+  function inlineMaps(mapId) {
+    var out = [];
+    var list = doc.getElementsByTagNameNS(SVG_NS, "svg");
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].areaMap && list[i].getAttribute("data-am-map") === mapId) out.push(list[i]);
+    }
+    return out;
+  }
+
+  // Maps loaded with <object>/<iframe>: messages go to every frame, and each
+  // SVG ignores the ones addressed to other maps.
+  function postToFrames(msg) {
+    var frames = [];
+    var tags = ["object", "iframe", "embed"];
+    for (var t = 0; t < tags.length; t++) {
+      var list = doc.getElementsByTagName(tags[t]);
+      for (var i = 0; i < list.length; i++) frames.push(list[i]);
+    }
+    for (i = 0; i < frames.length; i++) {
+      try {
+        var win = frames[i].contentWindow ||
+          (frames[i].getSVGDocument && frames[i].getSVGDocument().defaultView);
+        if (win) win.postMessage(msg, "*");
+      } catch (e) { /* frame not ready or not accessible */ }
+    }
   }
 
   function init(svg) {
@@ -325,13 +401,14 @@
 
     var single = svg.getAttribute("data-am-mode") === "single";
     var mapId = svg.getAttribute("data-am-map") || "";
+    var standalone = svg === doc.documentElement;
     var hits = {};
+    var parts = {};
     var order = [];
     var all = svg.getElementsByTagName("*");
     var i, el, id;
 
-    // Índice id -> elementos que muestran el estado de esa área.
-    var parts = {};
+    // id -> elements that show the state of that area.
     for (i = 0; i < all.length; i++) {
       el = all[i];
       id = el.getAttribute("data-area");
@@ -366,15 +443,17 @@
     }
 
     function notify(id) {
-      var detail = { id: id, name: nameOf(id), selected: isSelected(id), selection: selection() };
+      var sel = selection();
+      var detail = { map: mapId, id: id, name: nameOf(id), selected: isSelected(id), selection: sel };
+      if (!standalone) syncInputs(mapId, sel);
       svg.dispatchEvent(makeEvent("areachange", detail));
-      if (svg === document.documentElement && global.parent && global.parent !== global) {
+      if (standalone && global.parent && global.parent !== global) {
         try {
           global.parent.postMessage({
             type: "area-map:change", map: mapId, id: detail.id, name: detail.name,
-            selected: detail.selected, selection: detail.selection
+            selected: detail.selected, selection: sel
           }, "*");
-        } catch (e) { /* sin padre accesible */ }
+        } catch (e) { /* no reachable parent */ }
       }
     }
 
@@ -389,7 +468,14 @@
       if (isSelected(id) === on) return true;
       paint(id, on);
       if (!silent) notify(id);
+      else if (!standalone) syncInputs(mapId, selection());
       return true;
+    }
+
+    function setSelection(ids) {
+      var wanted = {};
+      for (var j = 0; j < ids.length; j++) wanted[ids[j]] = true;
+      for (j = 0; j < order.length; j++) select(order[j], !!wanted[order[j]], true);
     }
 
     function toggle(id) {
@@ -410,14 +496,12 @@
       toggle(hit.getAttribute("data-area"));
     }, false);
 
-    if (svg === document.documentElement && global.addEventListener) {
+    if (standalone && global.addEventListener) {
       global.addEventListener("message", function (e) {
         var msg = e.data;
         if (!msg || msg.type !== "area-map:select" || !msg.ids) return;
         if (msg.map && msg.map !== mapId) return;
-        var wanted = {};
-        for (var j = 0; j < msg.ids.length; j++) wanted[msg.ids[j]] = true;
-        for (j = 0; j < order.length; j++) select(order[j], !!wanted[order[j]], true);
+        setSelection(msg.ids);
       }, false);
     }
 
@@ -432,24 +516,77 @@
         var out = [];
         for (var j = 0; j < order.length; j++) out.push({ id: order[j], name: nameOf(order[j]) });
         return out;
-      }
+      },
+      // Internal: used by the checkbox binding.
+      _set: setSelection
     };
+
+    // Checkboxes already checked (e.g. restored by the browser) win.
+    if (!standalone) {
+      var pre = checkedIds(mapId);
+      if (pre.length) setSelection(pre);
+    }
     return svg.areaMap;
   }
 
   function initAll(root) {
-    var list = (root || document).getElementsByTagNameNS(SVG_NS, "svg");
+    var list = (root || doc).getElementsByTagNameNS(SVG_NS, "svg");
     for (var i = 0; i < list.length; i++) init(list[i]);
   }
 
-  if (!global.AreaMap) global.AreaMap = { init: init, initAll: initAll };
-
-  // Dentro del SVG generado este script va al final, así que los elementos ya
-  // existen. Incluido desde una página HTML, espera a que cargue el DOM.
-  var current = document.currentScript;
+  // Initialize the <svg> that contains this script right away (the script is
+  // the last child of the generated SVG, so every element already exists).
+  var current = doc.currentScript;
   if (current && current.ownerSVGElement) init(current.ownerSVGElement);
-  if (document.readyState === "loading" && document.addEventListener) {
-    document.addEventListener("DOMContentLoaded", function () { initAll(); }, false);
+
+  // The rest is set up once per page, even if this file runs several times
+  // (one copy per inline map, plus maybe one in the host page).
+  if (global.AreaMap) {
+    global.AreaMap.initAll();
+    return;
+  }
+  global.AreaMap = { init: init, initAll: initAll };
+
+  if (doc.documentElement.namespaceURI !== SVG_NS) {
+    // Host HTML page: keep bound inputs in sync with the maps.
+    doc.addEventListener("change", function (e) {
+      var input = e.target;
+      if (!isAreaInput(input)) return;
+      var mapId = input.getAttribute("data-area-map");
+      var ids = checkedIds(mapId);
+      var maps = inlineMaps(mapId);
+      for (var i = 0; i < maps.length; i++) {
+        if (input.type === "radio" || maps[i].getAttribute("data-am-mode") === "single") {
+          maps[i].areaMap.select(input.value, input.checked);
+        } else {
+          maps[i].areaMap._set(ids);
+        }
+      }
+      if (!maps.length) postToFrames({ type: "area-map:select", map: mapId, ids: ids });
+    }, false);
+
+    global.addEventListener("message", function (e) {
+      var msg = e.data;
+      if (msg && msg.type === "area-map:change" && msg.map && msg.selection) {
+        syncInputs(msg.map, msg.selection);
+      }
+    }, false);
+  }
+
+  // Inline maps are initialized while the page is still being parsed, maybe
+  // before their checkboxes exist. Once the DOM is ready, checked boxes win.
+  function applyInputs() {
+    var list = doc.getElementsByTagNameNS(SVG_NS, "svg");
+    for (var i = 0; i < list.length; i++) {
+      var svg = list[i];
+      if (!svg.areaMap || svg === doc.documentElement) continue;
+      var pre = checkedIds(svg.getAttribute("data-am-map") || "");
+      if (pre.length) svg.areaMap._set(pre);
+    }
+  }
+
+  if (doc.readyState === "loading" && doc.addEventListener) {
+    doc.addEventListener("DOMContentLoaded", function () { initAll(); applyInputs(); }, false);
   } else {
     initAll();
   }

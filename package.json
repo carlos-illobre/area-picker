@@ -1,7 +1,7 @@
 {
   "name": "area-map",
   "version": "1.0.0",
-  "description": "Genera mapas SVG seleccionables (barrios, provincias, países...) a partir de GeoJSON, con estilos en un CSS aparte.",
+  "description": "Turn GeoJSON into selectable SVG maps (neighbourhoods, provinces, countries...) styled by one shared CSS file.",
   "type": "module",
   "bin": {
     "geojson-to-svg": "tools/geojson-to-svg.mjs"

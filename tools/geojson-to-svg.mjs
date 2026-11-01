@@ -1,52 +1,57 @@
 #!/usr/bin/env node
 /**
- * geojson-to-svg: convierte un GeoJSON de polígonos en un mapa SVG
- * seleccionable, que se estiliza con src/area-map.css.
+ * geojson-to-svg: turns a GeoJSON file of polygons into a selectable SVG map
+ * styled by src/area-map.css.
  *
- * Uso:
- *   node tools/geojson-to-svg.mjs <entrada.geojson> [-o salida.svg] [opciones]
+ * Usage:
+ *   node tools/geojson-to-svg.mjs <input.geojson> [-o output.svg] [options]
  *
- * Entrada: GeoJSON estándar (RFC 7946) con coordenadas [longitud, latitud]
- * en WGS 84. Acepta FeatureCollection, Feature, Geometry o
- * GeometryCollection; se usan los Polygon y MultiPolygon y se ignora el resto.
- * Cada Feature es un área seleccionable (barrio, provincia, país...).
+ * Input: standard GeoJSON (RFC 7946), [longitude, latitude] coordinates in
+ * WGS 84. FeatureCollection, Feature, Geometry and GeometryCollection are
+ * accepted; Polygon and MultiPolygon geometries are used, everything else is
+ * ignored. Every Feature becomes one selectable area (a neighbourhood, a
+ * province, a country...).
  *
- * Opciones:
- *   -o, --output <archivo>   SVG de salida (por defecto, stdout)
- *   --name-prop <prop>       propiedad con el nombre visible. Si falta, se
- *                            prueba name, nombre, NAME, NOMBRE, NAME_ES, ADMIN...
- *   --id-prop <prop>         propiedad para el id del área (se convierte en
- *                            slug). Por defecto, el slug del nombre.
- *   --label-prop <prop>      propiedad con la posición del nombre: [lon, lat]
- *                            o {lon, lat}. Por defecto se calcula sola.
- *   --map-id <id>            id del mapa. Prefija los ids internos para poder
- *                            poner varios mapas en la misma página. Por
- *                            defecto, el nombre del archivo.
- *   --title <texto>          título accesible del mapa
- *   --desc <texto>           descripción o atribución de la fuente
- *   --width <px>             ancho del SVG (por defecto 800). El alto se
- *                            calcula para mantener la proporción.
- *   --padding <px>           margen interno (por defecto 20, deja lugar a
- *                            las sombras)
- *   --projection <nombre>    mercator (por defecto), equirectangular o
- *                            identity (coordenadas ya proyectadas, con y
- *                            creciendo hacia el norte)
- *   --simplify <px>          tolerancia de simplificación en píxeles (por
- *                            defecto 0.25; 0 la apaga). No abre huecos entre
- *                            áreas vecinas.
- *   --precision <n>          decimales de las coordenadas (por defecto 1)
- *   --min-island <px²>       descarta islas más chicas que eso (nunca el
- *                            polígono principal de un área). Por defecto 0.
- *   --bbox <o,s,e,n>         descarta polígonos cuyo centro cae fuera del
- *                            rectángulo [oeste, sur, este, norte], en grados
- *   --merge <origen=destino> une un área con otra (p. ej. islas que la fuente
- *                            trae como área aparte). Se puede repetir; los
- *                            ids son los del SVG generado.
- *   --rename <id=Nombre>     cambia el nombre visible de un área. Se puede repetir.
- *   --single                 selección única en vez de múltiple
- *   --css <href>             ruta al CSS desde el SVG (por defecto area-map.css)
- *   --no-css                 no enlazar ningún CSS
- *   --no-script              no incrustar el JS (cargá src/area-map.js aparte)
+ * Options:
+ *   -o, --output <file>      output SVG (default: stdout)
+ *   --inputs <file>          also write an HTML fragment with one checkbox
+ *                            per area (radio buttons with --single), already
+ *                            bound to the map
+ *   --name-prop <prop>       property holding the display name. When omitted,
+ *                            name, nombre, NAME, NOMBRE, NAME_EN, ADMIN... are
+ *                            tried in that order
+ *   --id-prop <prop>         property used for the area id (slugified).
+ *                            Default: the slug of the name
+ *   --label-prop <prop>      property holding the label position, as
+ *                            [lon, lat] or {lon, lat}. Default: computed
+ *   --map-id <id>            map id. Prefixes internal ids so several maps can
+ *                            share a page, and binds external checkboxes.
+ *                            Default: the output (or input) file name
+ *   --title <text>           accessible title of the map
+ *   --desc <text>            description or data attribution
+ *   --width <px>             SVG width (default 800). The height follows the
+ *                            aspect ratio of the data
+ *   --padding <px>           inner margin (default 20), room for shadows
+ *   --projection <name>      mercator (default), equirectangular, or identity
+ *                            (already projected data, y growing northwards)
+ *   --simplify <px>          simplification tolerance in pixels (default
+ *                            0.25; 0 turns it off). Shared borders are
+ *                            simplified identically, so no gaps open up
+ *   --precision <n>          decimals in coordinates (default 1)
+ *   --min-island <px²>       drop islands smaller than this (never the main
+ *                            polygon of an area). Default 0
+ *   --bbox <w,s,e,n>         drop polygons whose center falls outside the box
+ *                            [west, south, east, north], in degrees
+ *   --merge <from=to>        merge one area into another (e.g. islands that
+ *                            the source lists separately). Repeatable; ids are
+ *                            the generated ones
+ *   --rename <id=Name>       change the display name of an area (the id is
+ *                            kept). Repeatable
+ *   --single                 single selection instead of multiple
+ *   --css <href>             stylesheet path as seen from the SVG
+ *                            (default area-map.css)
+ *   --no-css                 do not link any stylesheet
+ *   --no-script              do not embed the JS (load src/area-map.js instead)
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join } from "node:path";
@@ -56,17 +61,18 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNTIME_PATH = join(HERE, "..", "src", "area-map.js");
 
 const NAME_CANDIDATES = [
-  "name", "nombre", "NAME", "Name", "NOMBRE", "Nombre", "name_es", "NAME_ES",
-  "nam", "NAM", "ADMIN", "admin", "NAME_1", "NAME_2", "title", "label",
+  "name", "nombre", "NAME", "Name", "NOMBRE", "Nombre", "name_en", "NAME_EN",
+  "name_es", "NAME_ES", "nam", "NAM", "ADMIN", "admin", "NAME_1", "NAME_2",
+  "title", "label",
 ];
 
-// Sombras del original en canvas: shadowBlur 10 equivale a stdDeviation 5.
+// Shadows of the original canvas version: shadowBlur 10 == stdDeviation 5.
 const SHADOW = {
   area: { blur: 5, dx: 0, dy: 0 },
   hover: { blur: 5, dx: -5, dy: 5 },
   label: { blur: 2.5, dx: 0, dy: 0 },
 };
-// Espacio que necesita una sombra fuera del área: 3σ + desplazamiento.
+// Room a shadow needs outside its area: 3σ + offset.
 const SHADOW_MARGIN = 3 * 5 + 5;
 
 export const DEFAULTS = {
@@ -77,6 +83,8 @@ export const DEFAULTS = {
   precision: 1,
   minIsland: 0,
   bbox: null,
+  merge: {},
+  rename: {},
   single: false,
   css: "area-map.css",
   script: true,
@@ -86,13 +94,11 @@ export const DEFAULTS = {
   nameProp: null,
   idProp: null,
   labelProp: null,
-  merge: {},
-  rename: {},
   fontSize: 13,
 };
 
 /* ------------------------------------------------------------------ */
-/* Utilidades                                                          */
+/* Helpers                                                             */
 /* ------------------------------------------------------------------ */
 
 export function slug(text) {
@@ -144,7 +150,7 @@ function pointInPolygon(x, y, polygon) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Lectura del GeoJSON                                                 */
+/* Reading GeoJSON                                                     */
 /* ------------------------------------------------------------------ */
 
 function polygonsOf(geometry) {
@@ -169,7 +175,7 @@ function featuresOf(geojson) {
       return [geojson];
     case undefined:
     case null:
-      throw new Error("La entrada no es GeoJSON (falta \"type\").");
+      throw new Error('The input is not GeoJSON (missing "type").');
     default:
       return [{ type: "Feature", properties: {}, geometry: geojson }];
   }
@@ -178,14 +184,14 @@ function featuresOf(geojson) {
 function pickName(feature, nameProp, index) {
   const props = feature.properties || {};
   if (nameProp) {
-    if (props[nameProp] == null) throw new Error(`El área ${index + 1} no tiene la propiedad "${nameProp}".`);
+    if (props[nameProp] == null) throw new Error(`Area ${index + 1} has no "${nameProp}" property.`);
     return String(props[nameProp]);
   }
   for (const key of NAME_CANDIDATES) {
     if (props[key] != null && String(props[key]).trim()) return String(props[key]).trim();
   }
   if (feature.id != null) return String(feature.id);
-  return `Área ${index + 1}`;
+  return `Area ${index + 1}`;
 }
 
 function readLabelPoint(value) {
@@ -199,7 +205,7 @@ function readLabelPoint(value) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Proyección                                                          */
+/* Projection                                                          */
 /* ------------------------------------------------------------------ */
 
 const RAD = Math.PI / 180;
@@ -219,18 +225,18 @@ export function makeProjection(name, centerLat = 0) {
     case "identity":
       return ([x, y]) => [x, -y];
     default:
-      throw new Error(`Proyección desconocida: "${name}" (usá mercator, equirectangular o identity).`);
+      throw new Error(`Unknown projection "${name}" (use mercator, equirectangular or identity).`);
   }
 }
 
 /* ------------------------------------------------------------------ */
-/* Simplificación sin huecos entre vecinos                             */
+/* Gap-free simplification                                             */
 /* ------------------------------------------------------------------ */
 /*
- * Los anillos se cortan en "nodos": los puntos donde se juntan bordes de
- * áreas distintas. Cada tramo entre nodos se simplifica con Douglas-Peucker
- * en un sentido canónico. Así, un borde que comparten dos áreas queda
- * idéntico en las dos y no aparecen huecos ni superposiciones.
+ * Rings are split at "junctions": the points where borders of different
+ * areas meet. Each stretch between junctions is simplified with
+ * Douglas-Peucker in a canonical direction, so a border shared by two areas
+ * comes out identical in both and no gaps or overlaps appear.
  */
 
 const key = (p) => p[0] + "," + p[1];
@@ -277,8 +283,8 @@ function douglasPeucker(points, tolerance) {
   return points.filter((_, i) => keep[i]);
 }
 
-// Simplifica un tramo siempre en el mismo sentido, sin importar el sentido
-// en que lo recorra cada anillo.
+// Always simplifies a stretch in the same direction, whatever direction each
+// ring walks it in.
 function simplifyArc(arc, tolerance) {
   const a = arc[0];
   const b = arc[arc.length - 1];
@@ -312,9 +318,9 @@ function simplifyRing(ring, junctions, tolerance) {
   for (let i = 0; i < n; i++) if (junctions.has(key(ring[i]))) starts.push(i);
 
   if (starts.length === 0) {
-    // Anillo sin vecinos (o compartido entero, como un enclave): se arranca
-    // del punto menor y se corta en el más lejano, así el resultado no
-    // depende del punto de inicio ni del sentido.
+    // Ring without neighbours (or shared as a whole, like an enclave): start
+    // at the smallest point and cut at the farthest one, so the result does
+    // not depend on where the ring starts or which way it goes.
     let m = 0;
     for (let i = 1; i < n; i++) if (comparePoints(ring[i], ring[m]) < 0) m = i;
     let far = m;
@@ -341,18 +347,18 @@ function simplifyRing(ring, junctions, tolerance) {
     } while (i !== to);
     arc.push(ring[to]);
     const simplified = simplifyArc(arc, tolerance);
-    simplified.pop(); // el último punto es el inicio del tramo siguiente
+    simplified.pop(); // the last point starts the next stretch
     out.push(...simplified);
   }
   return out;
 }
 
 /* ------------------------------------------------------------------ */
-/* Posición del nombre                                                 */
+/* Label position                                                      */
 /* ------------------------------------------------------------------ */
 
-// Centroide del polígono más grande. Si cae afuera (áreas cóncavas), se usa
-// el centro del tramo interior más ancho entre varias líneas horizontales.
+// Centroid of the largest polygon. When it falls outside (concave areas),
+// the middle of the widest inner segment across several horizontal lines.
 function labelPoint(polygons) {
   let main = polygons[0];
   let mainArea = 0;
@@ -400,7 +406,7 @@ function labelPoint(polygons) {
     xs.sort((p, q) => p - q);
     for (let k = 0; k + 1 < xs.length; k += 2) {
       const w = xs[k + 1] - xs[k];
-      // Entre segmentos igual de anchos, preferir el más cercano al centroide.
+      // Among similar widths, prefer the line closest to the centroid.
       const score = w - Math.abs(y - cy) * 0.25;
       if (!best || score > best.score) best = { score, x: (xs[k] + xs[k + 1]) / 2, y };
     }
@@ -409,15 +415,14 @@ function labelPoint(polygons) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Conversión                                                          */
+/* Conversion                                                          */
 /* ------------------------------------------------------------------ */
 
-export function geojsonToSvg(geojson, options = {}) {
-  const opt = { ...DEFAULTS, ...options };
+function buildAreas(geojson, opt) {
   const precision = Math.max(0, Math.min(6, Number(opt.precision)));
   const grid = 10 ** precision;
 
-  // 1. Áreas con sus polígonos en grados.
+  // 1. Areas with their polygons, in degrees.
   const areas = [];
   const usedIds = new Set();
   featuresOf(geojson).forEach((feature, index) => {
@@ -447,23 +452,23 @@ export function geojsonToSvg(geojson, options = {}) {
     const label = opt.labelProp ? readLabelPoint(props[opt.labelProp]) : null;
     areas.push({ id, name, polygons, label });
   });
-  if (!areas.length) throw new Error("El GeoJSON no tiene polígonos (Polygon o MultiPolygon).");
+  if (!areas.length) throw new Error("The GeoJSON has no polygons (Polygon or MultiPolygon).");
 
   const byId = new Map(areas.map((a) => [a.id, a]));
   for (const [from, to] of Object.entries(opt.merge || {})) {
     const src = byId.get(from);
     const dst = byId.get(to);
-    if (!src || !dst) throw new Error(`--merge: no existe el área "${!src ? from : to}".`);
+    if (!src || !dst) throw new Error(`--merge: there is no area "${!src ? from : to}".`);
     dst.polygons.push(...src.polygons);
     areas.splice(areas.indexOf(src), 1);
     byId.delete(from);
   }
   for (const [id, name] of Object.entries(opt.rename || {})) {
-    if (!byId.has(id)) throw new Error(`--rename: no existe el área "${id}".`);
+    if (!byId.has(id)) throw new Error(`--rename: there is no area "${id}".`);
     byId.get(id).name = String(name);
   }
 
-  // 2. Proyección y encuadre.
+  // 2. Projection and fitting.
   let lat0 = Infinity;
   let lat1 = -Infinity;
   for (const a of areas) for (const p of a.polygons) for (const [, lat] of p[0]) {
@@ -493,7 +498,7 @@ export function geojsonToSvg(geojson, options = {}) {
     Math.round(((y - minY) * scale + padding) * grid) / grid,
   ];
 
-  // 3. Pasar a píxeles, sacar puntos repetidos y anillos degenerados.
+  // 3. To pixels; drop repeated points and degenerate rings.
   const allRings = [];
   for (const a of areas) {
     a.pixel = a.projected.map((p) => p.map((ring) => {
@@ -511,7 +516,7 @@ export function geojsonToSvg(geojson, options = {}) {
     delete a.projected;
   }
 
-  // 4. Simplificación que respeta los bordes compartidos.
+  // 4. Simplification that keeps shared borders identical.
   const tolerance = Number(opt.simplify) || 0;
   if (tolerance > 0) {
     const junctions = findJunctions(allRings);
@@ -520,12 +525,12 @@ export function geojsonToSvg(geojson, options = {}) {
         const s = simplifyRing(ring, junctions, tolerance);
         return s.length >= 3 && Math.abs(ringArea(s)) > 0 ? s : null;
       }));
-      // Si se pierde el borde exterior, el polígono entero desaparece.
+      // A polygon whose outer ring collapsed disappears entirely.
       a.pixel = a.pixel.filter((p) => p[0]).map((p) => p.filter(Boolean));
     }
   }
 
-  // 5. Islas diminutas.
+  // 5. Tiny islands.
   const minIsland = Number(opt.minIsland) || 0;
   for (const a of areas) {
     if (minIsland > 0 && a.pixel.length > 1) {
@@ -534,12 +539,12 @@ export function geojsonToSvg(geojson, options = {}) {
       a.pixel = a.pixel.filter((_, i) => sizes[i] === biggest || sizes[i] >= minIsland);
     }
   }
-  const visible = areas.filter((a) => a.pixel.length);
   for (const a of areas) {
-    if (!a.pixel.length) process.emitWarning(`"${a.name}" quedó vacía al simplificar; probá con --simplify más chico o un --width mayor.`);
+    if (!a.pixel.length) process.emitWarning(`"${a.name}" vanished after simplification; try a smaller --simplify or a larger --width.`);
   }
+  const visible = areas.filter((a) => a.pixel.length);
 
-  // 6. Paths, cajas y posición de los nombres.
+  // 6. Paths, boxes and label positions.
   const charWidth = opt.fontSize * 0.62;
   for (const a of visible) {
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -558,16 +563,27 @@ export function geojsonToSvg(geojson, options = {}) {
     if (half * 2 < width) lp = [Math.max(half, Math.min(width - half, lp[0])), lp[1]];
     a.labelAt = lp;
   }
+  return { areas: visible, width, height };
+}
 
-  // 7. Armado del SVG.
+/**
+ * Converts GeoJSON into the SVG markup of a selectable map.
+ * @param {object} geojson  parsed GeoJSON
+ * @param {object} options  see DEFAULTS and the CLI options above
+ * @returns {string} SVG document
+ */
+export function geojsonToSvg(geojson, options = {}) {
+  const opt = { ...DEFAULTS, ...options };
+  const { areas, width, height } = buildAreas(geojson, opt);
+
   const mapId = slug(opt.mapId) || "map";
   const p = (s) => `${mapId}-${s}`;
   const runtime = opt.script ? readFileSync(RUNTIME_PATH, "utf8") : "";
-  if (runtime.includes("]]>")) throw new Error("El runtime no puede contener ']]>'.");
+  if (runtime.includes("]]>")) throw new Error("The runtime must not contain ']]>'.");
 
-  // Sombras: un filtro compartido relativo a la caja de cada área sirve
-  // cuando el área es grande. Las chicas usan uno propio en coordenadas
-  // absolutas, para que la sombra no quede cortada.
+  // Shadows: one shared filter, relative to each area's bounding box, works
+  // for large areas. Small ones get their own filter in absolute units, so
+  // their shadow is not clipped.
   const sharedRegion = 'x="-50%" y="-50%" width="200%" height="200%"';
   const filter = (id, kind, region) => {
     const s = SHADOW[kind];
@@ -582,7 +598,7 @@ export function geojsonToSvg(geojson, options = {}) {
     );
   };
   const ownFilters = [];
-  for (const a of visible) {
+  for (const a of areas) {
     const { x0, y0, x1, y1 } = a.box;
     if (Math.min(x1 - x0, y1 - y0) >= 2 * SHADOW_MARGIN) {
       a.fArea = "am-shadow-area";
@@ -629,7 +645,7 @@ export function geojsonToSvg(geojson, options = {}) {
   out.push(filter("am-shadow-hover", "hover", sharedRegion));
   out.push(filter("am-shadow-label", "label", 'x="-25%" y="-100%" width="150%" height="300%"'));
   out.push(...ownFilters);
-  for (const a of visible) out.push(`<path id="${p("geo-" + a.id)}" d="${a.d}"/>`);
+  for (const a of areas) out.push(`<path id="${p("geo-" + a.id)}" d="${a.d}"/>`);
   out.push("</defs>");
 
   const href = (a) => `xlink:href="#${p("geo-" + a.id)}"`;
@@ -639,8 +655,11 @@ export function geojsonToSvg(geojson, options = {}) {
     `font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" ` +
     `filter="url(#am-shadow-label)" visibility="hidden">${escapeXml(a.name)}</text>`;
 
+  // Layers, bottom to top: areas, selected areas, names of selected areas,
+  // and the interactive layer (hover look + transparent click target), which
+  // is last so the hovered area is painted above its neighbours.
   out.push('<g class="am-areas">');
-  for (const a of visible) {
+  for (const a of areas) {
     out.push(
       `<use class="am-area" data-area="${a.id}" ${href(a)} fill="#ffffff" stroke="#000000" ` +
       `stroke-width="1" fill-rule="evenodd" filter="url(#${a.fArea})"/>`
@@ -649,7 +668,7 @@ export function geojsonToSvg(geojson, options = {}) {
   out.push("</g>");
 
   out.push('<g class="am-selection">');
-  for (const a of visible) {
+  for (const a of areas) {
     out.push(
       `<use class="am-selected" data-area="${a.id}" data-selected="false" ${href(a)} ` +
       `fill="url(#am-grad-selected)" stroke="#800000" stroke-width="2" fill-rule="evenodd" visibility="hidden"/>`
@@ -658,11 +677,11 @@ export function geojsonToSvg(geojson, options = {}) {
   out.push("</g>");
 
   out.push('<g class="am-labels">');
-  for (const a of visible) out.push(text(a, "am-label"));
+  for (const a of areas) out.push(text(a, "am-label"));
   out.push("</g>");
 
   out.push('<g class="am-hits">');
-  for (const a of visible) {
+  for (const a of areas) {
     out.push(
       `<g class="am-hit" data-area="${a.id}" role="checkbox" aria-checked="false" ` +
       `aria-label="${escapeXml(a.name)}" tabindex="0">` +
@@ -680,22 +699,41 @@ export function geojsonToSvg(geojson, options = {}) {
   return out.join("\n") + "\n";
 }
 
+/**
+ * HTML fragment with one checkbox per area (radio buttons when single),
+ * sorted by name and bound to the map through data-area-map.
+ */
+export function geojsonToInputs(geojson, options = {}) {
+  const opt = { ...DEFAULTS, ...options };
+  const { areas } = buildAreas(geojson, opt);
+  const mapId = slug(opt.mapId) || "map";
+  const type = opt.single ? "radio" : "checkbox";
+  const sorted = areas.slice().sort((a, b) => a.name.localeCompare(b.name));
+  const lines = sorted.map((a) =>
+    `  <label><input type="${type}" name="${mapId}" value="${a.id}" data-area-map="${mapId}"> ${escapeXml(a.name)}</label>`
+  );
+  return `<fieldset class="area-map-inputs" data-area-map-inputs="${mapId}">\n` +
+    `  <legend>${escapeXml(opt.title || mapId)}</legend>\n${lines.join("\n")}\n</fieldset>\n`;
+}
+
 /* ------------------------------------------------------------------ */
-/* Línea de comandos                                                   */
+/* Command line                                                        */
 /* ------------------------------------------------------------------ */
 
 function parseArgs(argv) {
   const opt = {};
   let input = null;
   let output = null;
+  let inputs = null;
   const value = (i, flag) => {
-    if (i >= argv.length) throw new Error(`Falta el valor de ${flag}.`);
+    if (i >= argv.length) throw new Error(`Missing value for ${flag}.`);
     return argv[i];
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     switch (a) {
       case "-o": case "--output": output = value(++i, a); break;
+      case "--inputs": inputs = value(++i, a); break;
       case "--name-prop": opt.nameProp = value(++i, a); break;
       case "--id-prop": opt.idProp = value(++i, a); break;
       case "--label-prop": opt.labelProp = value(++i, a); break;
@@ -710,7 +748,7 @@ function parseArgs(argv) {
       case "--min-island": opt.minIsland = Number(value(++i, a)); break;
       case "--bbox": {
         const b = value(++i, a).split(",").map(Number);
-        if (b.length !== 4 || b.some(Number.isNaN)) throw new Error("--bbox espera oeste,sur,este,norte");
+        if (b.length !== 4 || b.some(Number.isNaN)) throw new Error("--bbox expects west,south,east,north");
         opt.bbox = b;
         break;
       }
@@ -718,7 +756,7 @@ function parseArgs(argv) {
       case "--rename": {
         const v = value(++i, a);
         const eq = v.indexOf("=");
-        if (eq < 1) throw new Error(`${a} espera id=valor`);
+        if (eq < 1) throw new Error(`${a} expects id=value`);
         const k = a.slice(2);
         opt[k] = { ...(opt[k] || {}), [v.slice(0, eq)]: v.slice(eq + 1) };
         break;
@@ -729,16 +767,18 @@ function parseArgs(argv) {
       case "--no-script": opt.script = false; break;
       case "-h": case "--help": return { help: true };
       default:
-        if (a.startsWith("-")) throw new Error(`Opción desconocida: ${a}`);
-        if (input) throw new Error(`Sobra el argumento: ${a}`);
+        if (a.startsWith("-")) throw new Error(`Unknown option: ${a}`);
+        if (input) throw new Error(`Unexpected argument: ${a}`);
         input = a;
     }
   }
   for (const k of ["width", "padding", "simplify", "precision", "minIsland"]) {
-    if (k in opt && !(opt[k] >= 0)) throw new Error(`Valor inválido para --${k}.`);
+    if (k in opt && !(opt[k] >= 0)) throw new Error(`Invalid value for --${k.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase())}.`);
   }
-  if ("width" in opt && opt.width <= 2 * (opt.padding ?? DEFAULTS.padding)) throw new Error("--width tiene que ser mayor que el doble del padding.");
-  return { input, output, opt };
+  if ("width" in opt && opt.width <= 2 * (opt.padding ?? DEFAULTS.padding)) {
+    throw new Error("--width must be larger than twice the padding.");
+  }
+  return { input, output, inputs, opt };
 }
 
 function main() {
@@ -754,12 +794,14 @@ function main() {
     console.log(src.slice(src.indexOf("/**") + 3, src.indexOf("*/")).replace(/^ \* ?/gm, ""));
     process.exit(args.help ? 0 : 2);
   }
-  const { input, output, opt } = args;
+  const { input, output, inputs, opt } = args;
   if (!opt.mapId) opt.mapId = basename(output || input, extname(output || input));
   try {
-    const svg = geojsonToSvg(JSON.parse(readFileSync(input, "utf8")), opt);
+    const geojson = JSON.parse(readFileSync(input, "utf8"));
+    const svg = geojsonToSvg(geojson, opt);
     if (output) writeFileSync(output, svg);
     else process.stdout.write(svg);
+    if (inputs) writeFileSync(inputs, geojsonToInputs(geojson, opt));
   } catch (e) {
     console.error(`Error: ${e.message}`);
     process.exit(1);
