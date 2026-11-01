@@ -1,0 +1,21 @@
+{
+  "name": "area-map",
+  "version": "1.0.0",
+  "description": "Turn GeoJSON into selectable SVG maps (neighbourhoods, provinces, countries...) styled by one shared CSS file.",
+  "type": "module",
+  "bin": {
+    "geojson-to-svg": "tools/geojson-to-svg.mjs"
+  },
+  "files": [
+    "tools/geojson-to-svg.mjs",
+    "src/area-map.css",
+    "src/area-map.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build:examples": "node tools/build-examples.mjs",
+    "test": "node --test"
+  }
+}
