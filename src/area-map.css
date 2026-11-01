@@ -1,0 +1,222 @@
+@charset "UTF-8";
+/*
+ * area-map.css: estilos compartidos por todos los SVG que genera
+ * tools/geojson-to-svg.mjs. El mismo archivo sirve para cualquier mapa
+ * (barrios, provincias, países...).
+ *
+ * Valores por defecto: los del área-picker original en canvas (old/draw.js).
+ *
+ * Cómo personalizarlo sin tocar los SVG:
+ *   - Cambiá las variables de abajo, en este archivo o en tu propia hoja:
+ *       .area-map { --am-selected-start: #9be15d; --am-selected-end: #00b09b; }
+ *     También podés apuntar a un mapa puntual: #mi-mapa { ... }
+ *   - O pisá cualquier regla. El CSS siempre gana sobre los atributos del SVG,
+ *     así que con "fill: #ccc" o "filter: none" reemplazás los degradados y
+ *     las sombras que trae el SVG.
+ *
+ * Compatibilidad: cada propiedad con variable tiene antes un valor fijo, que
+ * usan los navegadores y visores sin soporte de var(). Los degradados y las
+ * sombras se definen en el SVG (<linearGradient>, <filter>), pero sus colores
+ * salen de este archivo.
+ *
+ * Cómo cargarlo:
+ *   - SVG abierto directo, o con <object> o <iframe>: el propio SVG lo enlaza
+ *     con <?xml-stylesheet href="area-map.css"?>.
+ *   - SVG pegado inline en una página HTML: agregá
+ *     <link rel="stylesheet" href="area-map.css"> en esa página.
+ *   - Con <img> o background-image el navegador no carga CSS externo ni
+ *     ejecuta JS: el mapa sale estático y sin estilos.
+ */
+
+.area-map {
+  /* Áreas sin seleccionar */
+  --am-fill: #ffffff;
+  --am-stroke: #000000;
+  --am-stroke-width: 1;
+  --am-shadow-color: #000000;
+  --am-shadow-opacity: 1;
+
+  /* Área seleccionada: degradado de arriba hacia abajo */
+  --am-selected-start: #faf100;
+  --am-selected-end: #ffc821;
+  --am-selected-stroke: #800000; /* maroon */
+  --am-selected-stroke-width: 2;
+
+  /* Área bajo el mouse o con foco de teclado */
+  --am-hover-start: #ff0000;
+  --am-hover-end: #bf0000;
+  --am-hover-stroke: none;
+  --am-hover-shadow-color: #000000;
+  --am-hover-shadow-opacity: 1;
+
+  /* Nombres de las áreas */
+  --am-font-family: sans-serif;
+  --am-font-size: 13px;
+  --am-font-weight: bold;
+  --am-label-color: #ffffff;
+  --am-label-stroke: #000000;
+  --am-label-stroke-width: 1;
+  --am-label-shadow-color: #000000;
+  --am-label-shadow-opacity: 1;
+
+  /* Animaciones */
+  --am-transition: 120ms;
+
+  /* Que el SVG inline se adapte al ancho disponible sin deformarse */
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Áreas sin seleccionar ---------- */
+
+.area-map .am-area {
+  fill: #ffffff;
+  fill: var(--am-fill, #ffffff);
+  stroke: #000000;
+  stroke: var(--am-stroke, #000000);
+  stroke-width: 1;
+  stroke-width: var(--am-stroke-width, 1);
+  fill-rule: evenodd;
+}
+
+/* ---------- Áreas seleccionadas ---------- */
+
+.area-map .am-selected {
+  stroke: #800000;
+  stroke: var(--am-selected-stroke, #800000);
+  stroke-width: 2;
+  stroke-width: var(--am-selected-stroke-width, 2);
+  fill-rule: evenodd;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 120ms, visibility 120ms;
+  transition: opacity var(--am-transition, 120ms), visibility var(--am-transition, 120ms);
+}
+
+.area-map .am-selected[data-selected="true"] {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ---------- Área bajo el mouse ---------- */
+
+.area-map .am-hit {
+  cursor: pointer;
+  outline: none;
+}
+
+/* Zona de click: transparente, encima de todo */
+.area-map .am-target {
+  fill: #000000;
+  fill-opacity: 0;
+  stroke: none;
+  fill-rule: evenodd;
+  pointer-events: all;
+}
+
+/* Lo que se ve al pasar el mouse */
+.area-map .am-hover {
+  stroke: none;
+  stroke: var(--am-hover-stroke, none);
+  fill-rule: evenodd;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 120ms, visibility 120ms;
+  transition: opacity var(--am-transition, 120ms), visibility var(--am-transition, 120ms);
+}
+
+.area-map .am-hit:hover .am-hover,
+.area-map .am-hit:hover .am-hit-label {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Foco de teclado. Va en su propia regla porque un navegador que no
+   reconoce :focus-visible descarta la regla entera. */
+.area-map .am-hit:focus-visible .am-hover,
+.area-map .am-hit:focus-visible .am-hit-label {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ---------- Nombres ---------- */
+
+.area-map .am-label,
+.area-map .am-hit-label {
+  font-family: sans-serif;
+  font-family: var(--am-font-family, sans-serif);
+  font-size: 13px;
+  font-size: var(--am-font-size, 13px);
+  font-weight: bold;
+  font-weight: var(--am-font-weight, bold);
+  fill: #ffffff;
+  fill: var(--am-label-color, #ffffff);
+  stroke: #000000;
+  stroke: var(--am-label-stroke, #000000);
+  stroke-width: 1;
+  stroke-width: var(--am-label-stroke-width, 1);
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  text-anchor: middle;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 120ms, visibility 120ms;
+  transition: opacity var(--am-transition, 120ms), visibility var(--am-transition, 120ms);
+}
+
+/* El nombre de un área seleccionada siempre se ve */
+.area-map .am-label[data-selected="true"] {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ---------- Colores de degradados y sombras (definidos en el SVG) ---------- */
+
+.area-map .am-stop-selected-start {
+  stop-color: #faf100;
+  stop-color: var(--am-selected-start, #faf100);
+}
+.area-map .am-stop-selected-end {
+  stop-color: #ffc821;
+  stop-color: var(--am-selected-end, #ffc821);
+}
+.area-map .am-stop-hover-start {
+  stop-color: #ff0000;
+  stop-color: var(--am-hover-start, #ff0000);
+}
+.area-map .am-stop-hover-end {
+  stop-color: #bf0000;
+  stop-color: var(--am-hover-end, #bf0000);
+}
+.area-map .am-flood-area {
+  flood-color: #000000;
+  flood-color: var(--am-shadow-color, #000000);
+  flood-opacity: 1;
+  flood-opacity: var(--am-shadow-opacity, 1);
+}
+.area-map .am-flood-hover {
+  flood-color: #000000;
+  flood-color: var(--am-hover-shadow-color, #000000);
+  flood-opacity: 1;
+  flood-opacity: var(--am-hover-shadow-opacity, 1);
+}
+.area-map .am-flood-label {
+  flood-color: #000000;
+  flood-color: var(--am-label-shadow-color, #000000);
+  flood-opacity: 1;
+  flood-opacity: var(--am-label-shadow-opacity, 1);
+}
+
+/* Sin animaciones si el usuario pidió reducir el movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .area-map .am-selected,
+  .area-map .am-hover,
+  .area-map .am-label,
+  .area-map .am-hit-label {
+    transition: none;
+  }
+}
