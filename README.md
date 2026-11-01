@@ -424,6 +424,7 @@ tools/demo.template.html   template of the demo page
 examples/data/             sample GeoJSON files
 test/                      unit tests (node:test)
 old/                       the original 2013 canvas version, untouched
+docs/adr/                  architecture decision records
 ```
 
 Run the tests:
