@@ -1,5 +1,5 @@
 {
-  "name": "area-map",
+  "name": "area-picker",
   "version": "1.0.0",
   "description": "Turn GeoJSON into selectable SVG maps (neighbourhoods, provinces, countries...) styled by one shared CSS file.",
   "type": "module",
@@ -8,8 +8,8 @@
   },
   "files": [
     "tools/geojson-to-svg.mjs",
-    "src/area-map.css",
-    "src/area-map.js"
+    "src/area-picker.css",
+    "src/area-picker.js"
   ],
   "engines": {
     "node": ">=18"

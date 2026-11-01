@@ -1,4 +1,4 @@
-# area-map
+# area-picker
 
 Turn any GeoJSON file into a **selectable SVG map**: neighbourhoods, districts,
 provinces, countries, anything that can be described with polygons.
@@ -6,9 +6,9 @@ provinces, countries, anything that can be described with polygons.
 - **One script** (`tools/geojson-to-svg.mjs`, Node.js, no dependencies) builds
   a self-contained `.svg` with the shapes, the selection logic and keyboard and
   screen-reader support.
-- **One stylesheet** (`src/area-map.css`) styles every generated map. Restyle
+- **One stylesheet** (`src/area-picker.css`) styles every generated map. Restyle
   your maps without touching the SVG files.
-- **Checkboxes stay in sync for free**: add `data-area-map="<map id>"` to a
+- **Checkboxes stay in sync for free**: add `data-area-picker="<map id>"` to a
   checkbox and clicking the map checks it, and checking it selects the area.
 
 **Live demo:** https://carlos-illobre.github.io/area-picker/
@@ -55,7 +55,7 @@ That writes two files:
 - `barrios-checkboxes.html`: a ready-made list of checkboxes, one per area,
   already bound to the map.
 
-Copy `src/area-map.css` next to `barrios.svg` and open the SVG in a browser:
+Copy `src/area-picker.css` next to `barrios.svg` and open the SVG in a browser:
 hover and click the areas. Then put it in a page (see
 [section 4](#4-adding-the-map-to-your-project)).
 
@@ -126,9 +126,9 @@ Run `node tools/geojson-to-svg.mjs --help` for the same list.
 | `--merge <from=to>` | Merge one area into another. Repeatable. |
 | `--rename <id=Name>` | Change an area's display name; its id stays the same. Repeatable. |
 | `--single` | Single selection: selecting an area deselects the previous one. |
-| `--css <href>` | Stylesheet path as seen from the SVG (default `area-map.css`). |
+| `--css <href>` | Stylesheet path as seen from the SVG (default `area-picker.css`). |
 | `--no-css` | Do not link any stylesheet. |
-| `--no-script` | Do not embed the JavaScript (load `src/area-map.js` yourself). |
+| `--no-script` | Do not embed the JavaScript (load `src/area-picker.js` yourself). |
 
 ### Examples
 
@@ -172,10 +172,10 @@ Pick the option that fits your project:
 
 ### A. Inline SVG (recommended)
 
-1. Copy `src/area-map.css` into your project and link it:
+1. Copy `src/area-picker.css` into your project and link it:
 
    ```html
-   <link rel="stylesheet" href="area-map.css">
+   <link rel="stylesheet" href="area-picker.css">
    ```
 
 2. Paste the content of the generated `.svg` where the map should go,
@@ -183,7 +183,7 @@ Pick the option that fits your project:
    `<?xml-stylesheet...?>`):
 
    ```html
-   <svg class="area-map" data-am-map="barrios" ...>
+   <svg class="area-picker" data-ap-map="barrios" ...>
      ...
    </svg>
    ```
@@ -199,25 +199,25 @@ inserted that way, so load the runtime once in your page and initialize the
 map after inserting it:
 
 ```html
-<script src="area-map.js"></script>
+<script src="area-picker.js"></script>
 ```
 
 ```js
 container.innerHTML = svgText;
-AreaMap.init(container.querySelector("svg.area-map"));
+AreaPicker.init(container.querySelector("svg.area-picker"));
 ```
 
 ### B. `<object>` or `<iframe>`
 
-Put the `.svg` and `area-map.css` side by side (or generate with
-`--css path/to/area-map.css`), then:
+Put the `.svg` and `area-picker.css` side by side (or generate with
+`--css path/to/area-picker.css`), then:
 
 ```html
 <object type="image/svg+xml" data="barrios.svg"></object>
 ```
 
 The map runs in its own document. To sync checkboxes with it, also load
-`src/area-map.js` in your page (see [section 5](#5-syncing-with-checkboxes)).
+`src/area-picker.js` in your page (see [section 5](#5-syncing-with-checkboxes)).
 To talk to it from your own code, use `postMessage` (see
 [section 6](#6-javascript-api)).
 
@@ -237,12 +237,12 @@ get a plain black-and-white map.
 
 ## 5. Syncing with checkboxes
 
-Any checkbox whose `data-area-map` is the map id and whose `value` is an area
+Any checkbox whose `data-area-picker` is the map id and whose `value` is an area
 id is kept in sync with the map, both ways:
 
 ```html
-<label><input type="checkbox" data-area-map="barrios" value="palermo"> Palermo</label>
-<label><input type="checkbox" data-area-map="barrios" value="recoleta"> Recoleta</label>
+<label><input type="checkbox" data-area-picker="barrios" value="palermo"> Palermo</label>
+<label><input type="checkbox" data-area-picker="barrios" value="recoleta"> Recoleta</label>
 ```
 
 - Clicking an area on the map checks or unchecks its checkbox.
@@ -262,9 +262,9 @@ node tools/geojson-to-svg.mjs areas.geojson -o areas.svg --map-id areas --inputs
 ```
 
 ```html
-<fieldset class="area-map-inputs" data-area-map-inputs="areas">
+<fieldset class="area-picker-inputs" data-area-picker-inputs="areas">
   <legend>areas</legend>
-  <label><input type="checkbox" name="areas" value="agronomia" data-area-map="areas"> Agronomía</label>
+  <label><input type="checkbox" name="areas" value="agronomia" data-area-picker="areas"> Agronomía</label>
   ...
 </fieldset>
 ```
@@ -273,24 +273,24 @@ Where it works:
 
 - **Inline maps**: works with no extra script, because the runtime embedded in
   the SVG handles the binding.
-- **`<object>` / `<iframe>` maps**: add `<script src="area-map.js"></script>`
+- **`<object>` / `<iframe>` maps**: add `<script src="area-picker.js"></script>`
   to your page, which carries the messages between the map and the checkboxes.
 
 ---
 
 ## 6. JavaScript API
 
-Each inline map exposes an `areaMap` object:
+Each inline map exposes an `areaPicker` object:
 
 ```js
-const map = document.querySelector('svg[data-am-map="barrios"]');
+const map = document.querySelector('svg[data-ap-map="barrios"]');
 
-map.areaMap.select("palermo");         // select
-map.areaMap.select("palermo", false);  // deselect
-map.areaMap.toggle("palermo");
-map.areaMap.clear();
-map.areaMap.selected();                // ["palermo", ...]
-map.areaMap.areas();                   // [{ id: "palermo", name: "Palermo" }, ...]
+map.areaPicker.select("palermo");         // select
+map.areaPicker.select("palermo", false);  // deselect
+map.areaPicker.toggle("palermo");
+map.areaPicker.clear();
+map.areaPicker.selected();                // ["palermo", ...]
+map.areaPicker.areas();                   // [{ id: "palermo", name: "Palermo" }, ...]
 ```
 
 The map fires an `areachange` event when the selection changes through a click
@@ -311,7 +311,7 @@ The map posts a message to your page on every change:
 
 ```js
 window.addEventListener("message", (e) => {
-  if (e.data && e.data.type === "area-map:change") {
+  if (e.data && e.data.type === "area-picker:change") {
     // e.data = { type, map, id, name, selected, selection }
   }
 });
@@ -320,48 +320,51 @@ window.addEventListener("message", (e) => {
 Send one to replace its selection:
 
 ```js
-objectElement.contentWindow.postMessage({ type: "area-map:select", map: "barrios", ids: ["palermo"] }, "*");
+objectElement.contentWindow.postMessage({ type: "area-picker:select", map: "barrios", ids: ["palermo"] }, "*");
 ```
 
 On the same origin you can also call the API directly:
-`objectElement.contentDocument.documentElement.areaMap.select("palermo")`.
+`objectElement.contentDocument.documentElement.areaPicker.select("palermo")`.
 
 ---
 
 ## 7. Styling
 
-`src/area-map.css` reproduces the look of the original canvas version:
+`src/area-picker.css` reproduces the look of the original canvas version:
 
 | State | Look |
 |---|---|
 | Normal | White fill, black 1px border, soft black shadow |
 | Hover / keyboard focus | Red gradient (`#ff0000` → `#bf0000`), shadow offset down-left, name shown |
 | Selected | Yellow gradient (`#faf100` → `#ffc821`), maroon 2px border, name shown |
+| Selected + hover / focus | Orange gradient (`#ffb300` → `#f57c00`), maroon 2px border, shadow offset down-left. A click is visible right away, while the pointer is still over the area |
 | Names | Bold 13px sans-serif, white with a black outline and shadow |
 
 Fades between states take 120 ms and are turned off for users who ask for
 reduced motion.
 
 **Change the look without editing the SVG files**, in your own stylesheet
-loaded after `area-map.css`:
+loaded after `area-picker.css`:
 
 ```css
 /* every map */
-.area-map {
-  --am-selected-start: #9be15d;
-  --am-selected-end: #00b09b;
-  --am-selected-stroke: #006d5b;
-  --am-hover-start: #4f8cff;
-  --am-hover-end: #1f5fd6;
-  --am-font-family: Georgia, serif;
-  --am-transition: 0s;
+.area-picker {
+  --ap-selected-start: #9be15d;
+  --ap-selected-end: #00b09b;
+  --ap-selected-stroke: #006d5b;
+  --ap-hover-start: #4f8cff;
+  --ap-hover-end: #1f5fd6;
+  --ap-selected-hover-start: #00b09b;
+  --ap-selected-hover-end: #00806f;
+  --ap-font-family: Georgia, serif;
+  --ap-transition: 0s;
 }
 
 /* one map only */
-svg[data-am-map="barrios"] .am-area { filter: none; }   /* no shadows */
+svg[data-ap-map="barrios"] .ap-area { filter: none; }   /* no shadows */
 ```
 
-Every variable is listed and explained at the top of `src/area-map.css`.
+Every variable is listed and explained at the top of `src/area-picker.css`.
 Gradients and shadows are defined inside the SVG, because SVG `<filter>` and
 `<linearGradient>` work in more browsers than CSS `drop-shadow()`. Their colors
 still come from the CSS, and CSS can replace them (`fill: #ccc`) or remove them
@@ -370,14 +373,15 @@ still come from the CSS, and CSS can replace them (`fill: #ccc`) or remove them
 To write your own rules, target this structure:
 
 ```
-svg.area-map[data-am-map="…"][data-am-mode="single"]?
-├── g.am-areas      > use.am-area[data-area]                       every area
-├── g.am-selection  > use.am-selected[data-area][data-selected]    selected look
-├── g.am-labels     > text.am-label[data-area][data-selected]      names of selected areas
-└── g.am-hits       > g.am-hit[data-area][aria-checked]            pointer and keyboard layer
-                      ├── use.am-hover                             hover look
-                      ├── text.am-hit-label                        name on hover
-                      └── use.am-target                            transparent click target
+svg.area-picker[data-ap-map="…"][data-ap-mode="single"]?
+├── g.ap-areas      > use.ap-area[data-area]                       every area
+├── g.ap-selection  > use.ap-selected[data-area][data-selected]    selected look
+├── g.ap-labels     > text.ap-label[data-area][data-selected]      names of selected areas
+└── g.ap-hits       > g.ap-hit[data-area][aria-checked]            pointer and keyboard layer
+                      ├── use.ap-hover                             hover look
+                      ├── use.ap-hover-selected                    hover look of a selected area
+                      ├── text.ap-hit-label                        name on hover
+                      └── use.ap-target                            transparent click target
 ```
 
 ---
@@ -404,7 +408,7 @@ Known limitations:
 - To keep labels inside the map, their width is estimated. A much larger font
   set in your CSS may clip a name sitting right at the edge.
 - Several inline maps on one page share the ids of the common gradients and
-  filters (`am-grad-*`, `am-shadow-*`). They are identical in every map, so
+  filters (`ap-grad-*`, `ap-shadow-*`). They are identical in every map, so
   this is harmless; the shapes are prefixed with each map id.
 
 ---
@@ -413,8 +417,8 @@ Known limitations:
 
 ```
 tools/geojson-to-svg.mjs   the generator (CLI + Node API)
-src/area-map.css           shared stylesheet
-src/area-map.js            runtime, embedded in every SVG
+src/area-picker.css           shared stylesheet
+src/area-picker.js            runtime, embedded in every SVG
 tools/build-examples.mjs   rebuilds examples/ and the demo page (index.html)
 tools/demo.template.html   template of the demo page
 examples/data/             sample GeoJSON files

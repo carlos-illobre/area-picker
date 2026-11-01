@@ -4,9 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>area-map demo</title>
+<title>area-picker demo</title>
 <meta name="description" content="Selectable SVG maps generated from GeoJSON, styled with one shared CSS file.">
-<link rel="stylesheet" href="src/area-map.css">
+<link rel="stylesheet" href="src/area-picker.css">
 <style>
   :root {
     --bg: #f4f5f7;
@@ -62,13 +62,13 @@
     align-self: flex-start;
   }
   button:hover { border-color: var(--accent); }
-  .area-map-inputs {
+  .area-picker-inputs {
     margin: 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px;
     max-height: 420px; overflow: auto; background: #fafbfc;
   }
-  .area-map-inputs legend { font-weight: 600; font-size: .9rem; padding: 0 4px; }
-  .area-map-inputs label { display: block; font-size: .92rem; padding: 2px 0; cursor: pointer; }
-  .area-map-inputs input { accent-color: var(--accent); }
+  .area-picker-inputs legend { font-weight: 600; font-size: .9rem; padding: 0 4px; }
+  .area-picker-inputs label { display: block; font-size: .92rem; padding: 2px 0; cursor: pointer; }
+  .area-picker-inputs input { accent-color: var(--accent); }
   pre {
     background: var(--code-bg); color: var(--code-text); padding: 14px 16px; border-radius: 8px;
     overflow: auto; font-size: .85rem; line-height: 1.45; margin: 16px 0 0;
@@ -77,13 +77,13 @@
   footer { color: var(--muted); font-size: .85rem; padding-bottom: 40px; }
   @media (max-width: 760px) {
     .demo { grid-template-columns: minmax(0, 1fr); }
-    .area-map-inputs { max-height: 240px; }
+    .area-picker-inputs { max-height: 240px; }
   }
 </style>
 </head>
 <body>
 <header>
-  <h1>area-map</h1>
+  <h1>area-picker</h1>
   <p class="lead">Selectable SVG maps generated from any GeoJSON file: neighbourhoods,
   provinces, countries. One script builds the SVG, one shared CSS file styles every map,
   and external checkboxes stay in sync with no extra code.
@@ -107,13 +107,13 @@
     </div>
     <details>
       <summary>How this is wired</summary>
-<pre><code>&lt;link rel="stylesheet" href="area-map.css"&gt;
+<pre><code>&lt;link rel="stylesheet" href="area-picker.css"&gt;
 
 &lt;!-- the generated SVG, pasted inline (without its &lt;?xml ...?&gt; lines) --&gt;
-&lt;svg class="area-map" data-am-map="caba-barrios" ...&gt;...&lt;/svg&gt;
+&lt;svg class="area-picker" data-ap-map="caba-barrios" ...&gt;...&lt;/svg&gt;
 
-&lt;!-- any checkbox with data-area-map = the map id and value = an area id --&gt;
-&lt;label&gt;&lt;input type="checkbox" data-area-map="caba-barrios" value="palermo"&gt; Palermo&lt;/label&gt;</code></pre>
+&lt;!-- any checkbox with data-area-picker = the map id and value = an area id --&gt;
+&lt;label&gt;&lt;input type="checkbox" data-area-picker="caba-barrios" value="palermo"&gt; Palermo&lt;/label&gt;</code></pre>
     </details>
   </section>
 
@@ -136,7 +136,7 @@
   <section class="card" id="object">
     <h2>&lt;object&gt; embed, single selection</h2>
     <p class="hint">Countries of South America, built with <code>--single</code> and loaded as a
-    separate file through <code>&lt;object&gt;</code>. Including <code>area-map.js</code> in the
+    separate file through <code>&lt;object&gt;</code>. Including <code>area-picker.js</code> in the
     page keeps the radio buttons in sync through <code>postMessage</code>.</p>
     <div class="demo">
       <div class="map">
@@ -151,9 +151,9 @@
       <summary>How this is wired</summary>
 <pre><code>&lt;object type="image/svg+xml" data="sudamerica-paises.svg"&gt;&lt;/object&gt;
 
-&lt;label&gt;&lt;input type="radio" name="country" data-area-map="sudamerica-paises" value="peru"&gt; Perú&lt;/label&gt;
+&lt;label&gt;&lt;input type="radio" name="country" data-area-picker="sudamerica-paises" value="peru"&gt; Perú&lt;/label&gt;
 
-&lt;script src="area-map.js"&gt;&lt;/script&gt;</code></pre>
+&lt;script src="area-picker.js"&gt;&lt;/script&gt;</code></pre>
     </details>
   </section>
 
@@ -161,13 +161,13 @@
     <h2>Listening to changes</h2>
     <p class="hint">Every inline map fires an <code>areachange</code> event and exposes a small API.
     The "Selected" lines on this page use exactly this:</p>
-<pre><code>const map = document.querySelector('svg[data-am-map="caba-barrios"]');
+<pre><code>const map = document.querySelector('svg[data-ap-map="caba-barrios"]');
 
 map.addEventListener('areachange', (e) =&gt; {
   console.log(e.detail.name, e.detail.selected, e.detail.selection);
 });
 
-map.areaMap.select('palermo');   // also: toggle(id), clear(), selected(), areas()</code></pre>
+map.areaPicker.select('palermo');   // also: toggle(id), clear(), selected(), areas()</code></pre>
   </section>
 </main>
 
@@ -176,43 +176,43 @@ map.areaMap.select('palermo');   // also: toggle(id), clear(), selected(), areas
   Original 2013 canvas version: <a href="old/">old/</a>.</p>
 </footer>
 
-<script src="src/area-map.js"></script>
+<script src="src/area-picker.js"></script>
 <script>
 (function () {
   function names(svg, ids) {
     var byId = {};
-    svg.areaMap.areas().forEach(function (a) { byId[a.id] = a.name; });
+    svg.areaPicker.areas().forEach(function (a) { byId[a.id] = a.name; });
     return ids.length ? ids.map(function (id) { return byId[id]; }).join(", ") : "none";
   }
 
   [["caba-barrios", "caba-out"], ["argentina-provincias", "provinces-out"]].forEach(function (pair) {
-    var svg = document.querySelector('svg[data-am-map="' + pair[0] + '"]');
+    var svg = document.querySelector('svg[data-ap-map="' + pair[0] + '"]');
     var out = document.getElementById(pair[1]);
-    function refresh() { out.textContent = names(svg, svg.areaMap.selected()); }
+    function refresh() { out.textContent = names(svg, svg.areaPicker.selected()); }
     svg.addEventListener("areachange", refresh);
     // Checkbox changes select areas without an areachange event (that event
     // only reports clicks on the map), so refresh on them too.
     document.addEventListener("change", function (e) {
-      if (e.target.getAttribute("data-area-map") === pair[0]) refresh();
+      if (e.target.getAttribute("data-area-picker") === pair[0]) refresh();
     });
     refresh();
   });
 
   document.querySelectorAll("[data-clear]").forEach(function (button) {
     button.addEventListener("click", function () {
-      var svg = document.querySelector('svg[data-am-map="' + button.getAttribute("data-clear") + '"]');
-      svg.areaMap.clear();
+      var svg = document.querySelector('svg[data-ap-map="' + button.getAttribute("data-clear") + '"]');
+      svg.areaPicker.clear();
     });
   });
 
   var countries = document.getElementById("countries-out");
   window.addEventListener("message", function (e) {
-    if (e.data && e.data.type === "area-map:change" && e.data.map === "sudamerica-paises") {
+    if (e.data && e.data.type === "area-picker:change" && e.data.map === "sudamerica-paises") {
       countries.textContent = e.data.selected ? e.data.name : "none";
     }
   });
   document.addEventListener("change", function (e) {
-    if (e.target.getAttribute("data-area-map") === "sudamerica-paises") {
+    if (e.target.getAttribute("data-area-picker") === "sudamerica-paises") {
       countries.textContent = e.target.parentNode.textContent.trim();
     }
   });

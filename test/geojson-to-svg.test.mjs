@@ -50,12 +50,12 @@ test("mercator flips y (north up) and keeps west-east order", () => {
 test("builds layers, gradients, filters and the script", () => {
   const svg = geojsonToSvg(neighbours(), { mapId: "test" });
   assert.match(svg, /^<\?xml version="1.0" encoding="UTF-8"\?>/);
-  assert.match(svg, /<\?xml-stylesheet type="text\/css" href="area-map.css"\?>/);
-  assert.match(svg, /class="area-map" data-am-map="test"/);
-  for (const id of ["am-grad-selected", "am-grad-hover", "am-shadow-area", "am-shadow-hover", "am-shadow-label"]) {
+  assert.match(svg, /<\?xml-stylesheet type="text\/css" href="area-picker.css"\?>/);
+  assert.match(svg, /class="area-picker" data-ap-map="test"/);
+  for (const id of ["ap-grad-selected", "ap-grad-hover", "ap-grad-selected-hover", "ap-shadow-area", "ap-shadow-hover", "ap-shadow-label"]) {
     assert.match(svg, new RegExp(`id="${id}"`));
   }
-  for (const cls of ["am-area", "am-selected", "am-label", "am-hit", "am-hover", "am-hit-label", "am-target"]) {
+  for (const cls of ["ap-area", "ap-selected", "ap-label", "ap-hit", "ap-hover", "ap-hover-selected", "ap-hit-label", "ap-target"]) {
     const body = svg.slice(0, svg.indexOf("<script")); // the JS mentions class names in comments
     assert.equal(body.split(`class="${cls}"`).length - 1, 2, cls);
   }
@@ -117,7 +117,7 @@ test("--bbox and --min-island drop polygons", () => {
 
 test("--single sets the selection mode", () => {
   const sq = [[[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]];
-  assert.match(geojsonToSvg(feature("A", sq), { single: true }), /data-am-mode="single"/);
+  assert.match(geojsonToSvg(feature("A", sq), { single: true }), /data-ap-mode="single"/);
 });
 
 test("clear errors for invalid input", () => {
@@ -127,25 +127,25 @@ test("clear errors for invalid input", () => {
 });
 
 test("the command line writes the SVG and the inputs fragment", () => {
-  const dir = mkdtempSync(join(tmpdir(), "am-"));
+  const dir = mkdtempSync(join(tmpdir(), "ap-"));
   const input = join(dir, "zones.geojson");
   const output = join(dir, "zones.svg");
   writeFileSync(input, JSON.stringify(neighbours()));
   execFileSync(process.execPath, [TOOL, input, "-o", output, "--title", "Zones", "--inputs", join(dir, "zones.html"), "--no-script", "--css", "x.css"]);
   const svg = readFileSync(output, "utf8");
-  assert.match(svg, /data-am-map="zones"/);
+  assert.match(svg, /data-ap-map="zones"/);
   assert.match(svg, /<title id="zones-title">Zones<\/title>/);
   assert.match(svg, /href="x.css"/);
   assert.doesNotMatch(svg, /<script/);
   const html = readFileSync(join(dir, "zones.html"), "utf8");
-  assert.match(html, /<input type="checkbox" name="zones" value="east" data-area-map="zones"> East<\/label>/);
+  assert.match(html, /<input type="checkbox" name="zones" value="east" data-area-picker="zones"> East<\/label>/);
   assert.ok(html.indexOf("East") < html.indexOf("West"), "sorted by name");
 });
 
 test("geojsonToInputs uses radio buttons in single mode", () => {
   const html = geojsonToInputs(neighbours(), { mapId: "m", single: true });
   assert.equal((html.match(/type="radio"/g) || []).length, 2);
-  assert.match(html, /data-area-map="m"/);
+  assert.match(html, /data-area-picker="m"/);
 });
 
 test("--merge joins areas and --rename changes names", () => {

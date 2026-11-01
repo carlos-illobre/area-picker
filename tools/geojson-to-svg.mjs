@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * geojson-to-svg: turns a GeoJSON file of polygons into a selectable SVG map
- * styled by src/area-map.css.
+ * styled by src/area-picker.css.
  *
  * Usage:
  *   node tools/geojson-to-svg.mjs <input.geojson> [-o output.svg] [options]
@@ -49,16 +49,16 @@
  *                            kept). Repeatable
  *   --single                 single selection instead of multiple
  *   --css <href>             stylesheet path as seen from the SVG
- *                            (default area-map.css)
+ *                            (default area-picker.css)
  *   --no-css                 do not link any stylesheet
- *   --no-script              do not embed the JS (load src/area-map.js instead)
+ *   --no-script              do not embed the JS (load src/area-picker.js instead)
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const RUNTIME_PATH = join(HERE, "..", "src", "area-map.js");
+const RUNTIME_PATH = join(HERE, "..", "src", "area-picker.js");
 
 const NAME_CANDIDATES = [
   "name", "nombre", "NAME", "Name", "NOMBRE", "Nombre", "name_en", "NAME_EN",
@@ -86,7 +86,7 @@ export const DEFAULTS = {
   merge: {},
   rename: {},
   single: false,
-  css: "area-map.css",
+  css: "area-picker.css",
   script: true,
   title: null,
   desc: null,
@@ -590,9 +590,9 @@ export function geojsonToSvg(geojson, options = {}) {
     return (
       `<filter id="${id}" ${region} color-interpolation-filters="sRGB">` +
       `<feGaussianBlur in="SourceAlpha" stdDeviation="${s.blur}"/>` +
-      `<feOffset dx="${s.dx}" dy="${s.dy}" result="am-blur"/>` +
-      `<feFlood class="am-flood-${kind}" flood-color="#000000" flood-opacity="1"/>` +
-      `<feComposite in2="am-blur" operator="in"/>` +
+      `<feOffset dx="${s.dx}" dy="${s.dy}" result="ap-blur"/>` +
+      `<feFlood class="ap-flood-${kind}" flood-color="#000000" flood-opacity="1"/>` +
+      `<feComposite in2="ap-blur" operator="in"/>` +
       `<feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>` +
       `</filter>`
     );
@@ -601,8 +601,8 @@ export function geojsonToSvg(geojson, options = {}) {
   for (const a of areas) {
     const { x0, y0, x1, y1 } = a.box;
     if (Math.min(x1 - x0, y1 - y0) >= 2 * SHADOW_MARGIN) {
-      a.fArea = "am-shadow-area";
-      a.fHover = "am-shadow-hover";
+      a.fArea = "ap-shadow-area";
+      a.fHover = "ap-shadow-hover";
     } else {
       const m = SHADOW_MARGIN;
       const region =
@@ -620,8 +620,8 @@ export function geojsonToSvg(geojson, options = {}) {
   if (opt.css) out.push(`<?xml-stylesheet type="text/css" href="${escapeXml(opt.css)}"?>`);
   out.push(
     `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ` +
-    `version="1.1" class="area-map" data-am-map="${escapeXml(mapId)}"` +
-    (opt.single ? ' data-am-mode="single"' : "") +
+    `version="1.1" class="area-picker" data-ap-map="${escapeXml(mapId)}"` +
+    (opt.single ? ' data-ap-mode="single"' : "") +
     ` width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" ` +
     `role="group" aria-labelledby="${p("title")}">`
   );
@@ -630,20 +630,26 @@ export function geojsonToSvg(geojson, options = {}) {
 
   out.push("<defs>");
   out.push(
-    '<linearGradient id="am-grad-selected" x1="0" y1="0" x2="0" y2="1">' +
-    '<stop offset="0" class="am-stop-selected-start" stop-color="#faf100"/>' +
-    '<stop offset="1" class="am-stop-selected-end" stop-color="#ffc821"/>' +
+    '<linearGradient id="ap-grad-selected" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" class="ap-stop-selected-start" stop-color="#faf100"/>' +
+    '<stop offset="1" class="ap-stop-selected-end" stop-color="#ffc821"/>' +
     "</linearGradient>"
   );
   out.push(
-    '<linearGradient id="am-grad-hover" x1="0" y1="0" x2="0" y2="1">' +
-    '<stop offset="0" class="am-stop-hover-start" stop-color="#ff0000"/>' +
-    '<stop offset="1" class="am-stop-hover-end" stop-color="#bf0000"/>' +
+    '<linearGradient id="ap-grad-hover" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" class="ap-stop-hover-start" stop-color="#ff0000"/>' +
+    '<stop offset="1" class="ap-stop-hover-end" stop-color="#bf0000"/>' +
     "</linearGradient>"
   );
-  out.push(filter("am-shadow-area", "area", sharedRegion));
-  out.push(filter("am-shadow-hover", "hover", sharedRegion));
-  out.push(filter("am-shadow-label", "label", 'x="-25%" y="-100%" width="150%" height="300%"'));
+  out.push(
+    '<linearGradient id="ap-grad-selected-hover" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" class="ap-stop-selected-hover-start" stop-color="#ffb300"/>' +
+    '<stop offset="1" class="ap-stop-selected-hover-end" stop-color="#f57c00"/>' +
+    "</linearGradient>"
+  );
+  out.push(filter("ap-shadow-area", "area", sharedRegion));
+  out.push(filter("ap-shadow-hover", "hover", sharedRegion));
+  out.push(filter("ap-shadow-label", "label", 'x="-25%" y="-100%" width="150%" height="300%"'));
   out.push(...ownFilters);
   for (const a of areas) out.push(`<path id="${p("geo-" + a.id)}" d="${a.d}"/>`);
   out.push("</defs>");
@@ -653,42 +659,45 @@ export function geojsonToSvg(geojson, options = {}) {
     `<text class="${cls}" data-area="${a.id}" x="${num(a.labelAt[0], 1)}" y="${num(a.labelAt[1], 1)}" ` +
     `dy=".35em" text-anchor="middle" font-family="sans-serif" font-size="${opt.fontSize}" ` +
     `font-weight="bold" fill="#ffffff" stroke="#000000" stroke-width="1" ` +
-    `filter="url(#am-shadow-label)" visibility="hidden">${escapeXml(a.name)}</text>`;
+    `filter="url(#ap-shadow-label)" visibility="hidden">${escapeXml(a.name)}</text>`;
 
   // Layers, bottom to top: areas, selected areas, names of selected areas,
-  // and the interactive layer (hover look + transparent click target), which
+  // and the interactive layer (hover looks for unselected and selected areas,
+  // name, transparent click target), which
   // is last so the hovered area is painted above its neighbours.
-  out.push('<g class="am-areas">');
+  out.push('<g class="ap-areas">');
   for (const a of areas) {
     out.push(
-      `<use class="am-area" data-area="${a.id}" ${href(a)} fill="#ffffff" stroke="#000000" ` +
+      `<use class="ap-area" data-area="${a.id}" ${href(a)} fill="#ffffff" stroke="#000000" ` +
       `stroke-width="1" fill-rule="evenodd" filter="url(#${a.fArea})"/>`
     );
   }
   out.push("</g>");
 
-  out.push('<g class="am-selection">');
+  out.push('<g class="ap-selection">');
   for (const a of areas) {
     out.push(
-      `<use class="am-selected" data-area="${a.id}" data-selected="false" ${href(a)} ` +
-      `fill="url(#am-grad-selected)" stroke="#800000" stroke-width="2" fill-rule="evenodd" visibility="hidden"/>`
+      `<use class="ap-selected" data-area="${a.id}" data-selected="false" ${href(a)} ` +
+      `fill="url(#ap-grad-selected)" stroke="#800000" stroke-width="2" fill-rule="evenodd" visibility="hidden"/>`
     );
   }
   out.push("</g>");
 
-  out.push('<g class="am-labels">');
-  for (const a of areas) out.push(text(a, "am-label"));
+  out.push('<g class="ap-labels">');
+  for (const a of areas) out.push(text(a, "ap-label"));
   out.push("</g>");
 
-  out.push('<g class="am-hits">');
+  out.push('<g class="ap-hits">');
   for (const a of areas) {
     out.push(
-      `<g class="am-hit" data-area="${a.id}" role="checkbox" aria-checked="false" ` +
+      `<g class="ap-hit" data-area="${a.id}" role="checkbox" aria-checked="false" ` +
       `aria-label="${escapeXml(a.name)}" tabindex="0">` +
-      `<use class="am-hover" ${href(a)} fill="url(#am-grad-hover)" fill-rule="evenodd" ` +
+      `<use class="ap-hover" ${href(a)} fill="url(#ap-grad-hover)" fill-rule="evenodd" ` +
       `filter="url(#${a.fHover})" visibility="hidden"/>` +
-      text(a, "am-hit-label") +
-      `<use class="am-target" ${href(a)} fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/>` +
+      `<use class="ap-hover-selected" ${href(a)} fill="url(#ap-grad-selected-hover)" stroke="#800000" ` +
+      `stroke-width="2" fill-rule="evenodd" filter="url(#${a.fHover})" visibility="hidden"/>` +
+      text(a, "ap-hit-label") +
+      `<use class="ap-target" ${href(a)} fill="#000000" fill-opacity="0" fill-rule="evenodd" pointer-events="all"/>` +
       "</g>"
     );
   }
@@ -701,7 +710,7 @@ export function geojsonToSvg(geojson, options = {}) {
 
 /**
  * HTML fragment with one checkbox per area (radio buttons when single),
- * sorted by name and bound to the map through data-area-map.
+ * sorted by name and bound to the map through data-area-picker.
  */
 export function geojsonToInputs(geojson, options = {}) {
   const opt = { ...DEFAULTS, ...options };
@@ -710,9 +719,9 @@ export function geojsonToInputs(geojson, options = {}) {
   const type = opt.single ? "radio" : "checkbox";
   const sorted = areas.slice().sort((a, b) => a.name.localeCompare(b.name));
   const lines = sorted.map((a) =>
-    `  <label><input type="${type}" name="${mapId}" value="${a.id}" data-area-map="${mapId}"> ${escapeXml(a.name)}</label>`
+    `  <label><input type="${type}" name="${mapId}" value="${a.id}" data-area-picker="${mapId}"> ${escapeXml(a.name)}</label>`
   );
-  return `<fieldset class="area-map-inputs" data-area-map-inputs="${mapId}">\n` +
+  return `<fieldset class="area-picker-inputs" data-area-picker-inputs="${mapId}">\n` +
     `  <legend>${escapeXml(opt.title || mapId)}</legend>\n${lines.join("\n")}\n</fieldset>\n`;
 }
 

@@ -64,7 +64,7 @@ const MAPS = [
 const parts = {};
 for (const m of MAPS) {
   const geojson = JSON.parse(readFileSync(join(EX, m.input), "utf8"));
-  const svg = geojsonToSvg(geojson, { ...m, css: "../src/area-map.css" });
+  const svg = geojsonToSvg(geojson, { ...m, css: "../src/area-picker.css" });
   writeFileSync(join(EX, `${m.mapId}.svg`), svg);
   // Inline version: no XML prolog (the page links the stylesheet).
   parts[`${m.mapId}.svg`] = svg.replace(/^<\?xml[^>]*\?>\n/gm, "");
